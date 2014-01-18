@@ -43,6 +43,7 @@
 		2ECA97B0188A341E00994289 /* CGFlowInteractions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECA97AC188A341E00994289 /* CGFlowInteractions.m */; };
 		2ECA97B1188A341E00994289 /* CGFlowAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECA97AE188A341E00994289 /* CGFlowAnimations.m */; };
 		2ED0C640188B112400B65265 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2ED0C63F188B112400B65265 /* FontAwesome.ttf */; };
+		2ED0C645188B13B300B65265 /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0C644188B13B300B65265 /* NSString+FontAwesome.m */; };
 		2ED8AD31188AA2CA004B8CD3 /* PFBarsLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED8AD30188AA2CA004B8CD3 /* PFBarsLookup.m */; };
 		2ED8AD34188AA2D7004B8CD3 /* PFDrinksLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED8AD33188AA2D7004B8CD3 /* PFDrinksLookup.m */; };
 		2ED8AD37188AA2E6004B8CD3 /* PFFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED8AD36188AA2E6004B8CD3 /* PFFriends.m */; };
@@ -117,6 +118,8 @@
 		2ECA97AE188A341E00994289 /* CGFlowAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGFlowAnimations.m; sourceTree = "<group>"; };
 		2ED0C63F188B112400B65265 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		2ED0C641188B127D00B65265 /* BacHome-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "BacHome-Info.plist"; sourceTree = "<group>"; };
+		2ED0C643188B13B300B65265 /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontAwesome.h"; sourceTree = "<group>"; };
+		2ED0C644188B13B300B65265 /* NSString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FontAwesome.m"; sourceTree = "<group>"; };
 		2ED8AD2F188AA2CA004B8CD3 /* PFBarsLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFBarsLookup.h; sourceTree = "<group>"; };
 		2ED8AD30188AA2CA004B8CD3 /* PFBarsLookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFBarsLookup.m; sourceTree = "<group>"; };
 		2ED8AD32188AA2D7004B8CD3 /* PFDrinksLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFDrinksLookup.h; sourceTree = "<group>"; };
@@ -280,7 +283,7 @@
 			isa = PBXGroup;
 			children = (
 				2ECA975F188A225700994289 /* Images.xcassets */,
-				2ED0C63F188B112400B65265 /* FontAwesome.ttf */,
+				2ED0C646188B13D700B65265 /* FontAwesome */,
 				2ED8AD4C188ACB40004B8CD3 /* Images */,
 				2ECA9753188A225700994289 /* main.m */,
 				2ECA9750188A225700994289 /* InfoPlist.strings */,
@@ -403,6 +406,16 @@
 				2ECA9757188A225700994289 /* AppDelegate.m */,
 			);
 			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		2ED0C646188B13D700B65265 /* FontAwesome */ = {
+			isa = PBXGroup;
+			children = (
+				2ED0C643188B13B300B65265 /* NSString+FontAwesome.h */,
+				2ED0C644188B13B300B65265 /* NSString+FontAwesome.m */,
+				2ED0C63F188B112400B65265 /* FontAwesome.ttf */,
+			);
+			name = FontAwesome;
 			sourceTree = "<group>";
 		};
 		2ED8AD3E188AC46B004B8CD3 /* SOSView */ = {
@@ -529,6 +542,7 @@
 				2ECA979A188A242300994289 /* ToastsViewController.m in Sources */,
 				2ECA97B0188A341E00994289 /* CGFlowInteractions.m in Sources */,
 				2ECA9758188A225700994289 /* AppDelegate.m in Sources */,
+				2ED0C645188B13B300B65265 /* NSString+FontAwesome.m in Sources */,
 				2E5E75B4188A760E004AD75C /* LoginViewController.m in Sources */,
 				2ED8AD3A188AA2F5004B8CD3 /* PFToasts.m in Sources */,
 				2ECA97AF188A341E00994289 /* CGFlowController.m in Sources */,

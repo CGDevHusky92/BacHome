@@ -67,17 +67,17 @@
     static NSString *CellIdentifier = @"FriendsCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
+    NSString *name;
     if (_searching) {
-        NSString *name = [[_searchArray objectAtIndex:[indexPath row]] objectForKey:@"username"];
-        cell.textLabel.text = name;
+        name = [[_searchArray objectAtIndex:[indexPath row]] objectForKey:@"username"];
     } else {
-        NSString *name = [[_friendsArray objectAtIndex:[indexPath row]] objectForKey:@"you"];
-        cell.imageView.layer.cornerRadius = 20.0f;
-        cell.imageView.layer.masksToBounds = YES;
-        cell.textLabel.text = name;
+        name = [[_friendsArray objectAtIndex:[indexPath row]] objectForKey:@"you"];
     }
     
     // Configure the cell...
+    cell.textLabel.text = name;
+    cell.imageView.layer.cornerRadius = 20.0f;
+    cell.imageView.layer.masksToBounds = YES;
     
     return cell;
 }

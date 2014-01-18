@@ -7,8 +7,13 @@
 //
 
 #import "NewsViewController.h"
+#import "NSString+FontAwesome.h"
 
 @interface NewsViewController() <UINavigationControllerDelegate>
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *barsButton;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *toastButton;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *profileButton;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *sosButton;
 @property (nonatomic, strong) NSMutableArray *newsArray;
 -(IBAction)barsPressed:(id)sender;
 -(IBAction)toastsPressed:(id)sender;
@@ -21,6 +26,17 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     _newsArray = [[NSMutableArray alloc] init];
+    
+    NSDictionary *fontDic = [NSDictionary dictionaryWithObject:[UIFont fontWithName:kFontAwesomeFamilyName size:20.0] forKey:NSFontAttributeName];
+    [_barsButton setTitleTextAttributes:fontDic forState:UIControlStateNormal];
+    [_toastButton setTitleTextAttributes:fontDic forState:UIControlStateNormal];
+    [_profileButton setTitleTextAttributes:fontDic forState:UIControlStateNormal];
+    [_sosButton setTitleTextAttributes:fontDic forState:UIControlStateNormal];
+    
+    [_barsButton setTitle:[NSString fontAwesomeIconStringForEnum:FABeer]];
+    [_toastButton setTitle:[NSString fontAwesomeIconStringForEnum:FAGlass]];
+    [_profileButton setTitle:[NSString fontAwesomeIconStringForEnum:FAUsers]];
+    [_sosButton setTitle:[NSString fontAwesomeIconStringForEnum:FAExclamationTriangle]];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     

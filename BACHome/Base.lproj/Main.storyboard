@@ -185,6 +185,12 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="GC8-y2-xQA"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="News Feed" id="3n0-Fv-BwL"/>
+                    <connections>
+                        <outlet property="barsButton" destination="sNo-Wo-E97" id="1IW-3s-9Fe"/>
+                        <outlet property="profileButton" destination="ljL-Vk-8bz" id="d68-dB-nQP"/>
+                        <outlet property="sosButton" destination="dSN-ky-15X" id="zds-Zg-Pgx"/>
+                        <outlet property="toastButton" destination="lol-MD-dw4" id="fiE-Cy-BnH"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ta8-qQ-epx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
