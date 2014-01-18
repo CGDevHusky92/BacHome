@@ -24,7 +24,7 @@
 #pragma mark - Button Delegate
 
 -(IBAction)donePressed:(id)sender {
-    UIViewController *destController = [self.storyboard instantiateViewControllerWithIdentifier:@"CGFlowInitialScene"];
+    UIViewController *destController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileView"];
     [self.flowController flowToViewController:destController withAnimation:kCGFlowAnimationSlideDown completion:^(BOOL finished){}];
 }
 

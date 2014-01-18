@@ -13,7 +13,7 @@
 -(IBAction)barsPressed:(id)sender;
 -(IBAction)toastsPressed:(id)sender;
 -(IBAction)profilePressed:(id)sender;
--(IBAction)settingsPressed:(id)sender;
+-(IBAction)sosPressed:(id)sender;
 @end
 
 @implementation NewsViewController
@@ -62,9 +62,8 @@
     [self.flowController flowToViewController:destController withAnimation:kCGFlowAnimationSlideUp completion:^(BOOL finished){}];
 }
 
--(IBAction)settingsPressed:(id)sender {
-    UIViewController *destController = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingsView"];
-    [self.flowController flowToViewController:destController withAnimation:kCGFlowAnimationSlideUp completion:^(BOOL finished){}];
+-(IBAction)sosPressed:(id)sender {
+    
 }
 
 #pragma mark - Table view data source

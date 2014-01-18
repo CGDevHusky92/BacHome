@@ -46,6 +46,9 @@
 		2ED8AD34188AA2D7004B8CD3 /* PFDrinks.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED8AD33188AA2D7004B8CD3 /* PFDrinks.m */; };
 		2ED8AD37188AA2E6004B8CD3 /* PFFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED8AD36188AA2E6004B8CD3 /* PFFriend.m */; };
 		2ED8AD3A188AA2F5004B8CD3 /* PFToasts.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED8AD39188AA2F5004B8CD3 /* PFToasts.m */; };
+		2ED8AD3D188AB20D004B8CD3 /* PFNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED8AD3C188AB20D004B8CD3 /* PFNotifications.m */; };
+		2ED8AD49188ACB39004B8CD3 /* BAChomePreview.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ED8AD46188ACB39004B8CD3 /* BAChomePreview.png */; };
+		2ED8AD4B188ACB39004B8CD3 /* BAChomePreview@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ED8AD48188ACB39004B8CD3 /* BAChomePreview@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +119,10 @@
 		2ED8AD36188AA2E6004B8CD3 /* PFFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFFriend.m; sourceTree = "<group>"; };
 		2ED8AD38188AA2F5004B8CD3 /* PFToasts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFToasts.h; sourceTree = "<group>"; };
 		2ED8AD39188AA2F5004B8CD3 /* PFToasts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFToasts.m; sourceTree = "<group>"; };
+		2ED8AD3B188AB20D004B8CD3 /* PFNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFNotifications.h; sourceTree = "<group>"; };
+		2ED8AD3C188AB20D004B8CD3 /* PFNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFNotifications.m; sourceTree = "<group>"; };
+		2ED8AD46188ACB39004B8CD3 /* BAChomePreview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BAChomePreview.png; sourceTree = "<group>"; };
+		2ED8AD48188ACB39004B8CD3 /* BAChomePreview@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BAChomePreview@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +195,8 @@
 				2ED8AD33188AA2D7004B8CD3 /* PFDrinks.m */,
 				2ED8AD35188AA2E6004B8CD3 /* PFFriend.h */,
 				2ED8AD36188AA2E6004B8CD3 /* PFFriend.m */,
+				2ED8AD3B188AB20D004B8CD3 /* PFNotifications.h */,
+				2ED8AD3C188AB20D004B8CD3 /* PFNotifications.m */,
 				2ED8AD38188AA2F5004B8CD3 /* PFToasts.h */,
 				2ED8AD39188AA2F5004B8CD3 /* PFToasts.m */,
 			);
@@ -254,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				2ECA975F188A225700994289 /* Images.xcassets */,
+				2ED8AD4C188ACB40004B8CD3 /* Images */,
 				2ECA9753188A225700994289 /* main.m */,
 				2ECA9750188A225700994289 /* InfoPlist.strings */,
 				2ECA974F188A225700994289 /* BACHome-Info.plist */,
@@ -325,7 +335,7 @@
 				2ECA9794188A23E700994289 /* BarsView */,
 				2ECA9792188A235F00994289 /* ToastsView */,
 				2ECA9791188A235A00994289 /* ProfileView */,
-				2ECA9793188A237200994289 /* SettingsView */,
+				2ED8AD3E188AC46B004B8CD3 /* SOSView */,
 			);
 			name = BarControllers;
 			sourceTree = "<group>";
@@ -335,6 +345,7 @@
 			children = (
 				2ECA979B188A242B00994289 /* ProfileViewController.h */,
 				2ECA979C188A242B00994289 /* ProfileViewController.m */,
+				2ECA9793188A237200994289 /* SettingsView */,
 			);
 			name = ProfileView;
 			sourceTree = "<group>";
@@ -373,6 +384,22 @@
 				2ECA9757188A225700994289 /* AppDelegate.m */,
 			);
 			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		2ED8AD3E188AC46B004B8CD3 /* SOSView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = SOSView;
+			sourceTree = "<group>";
+		};
+		2ED8AD4C188ACB40004B8CD3 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				2ED8AD46188ACB39004B8CD3 /* BAChomePreview.png */,
+				2ED8AD48188ACB39004B8CD3 /* BAChomePreview@2x.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -452,7 +479,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2ECA9760188A225700994289 /* Images.xcassets in Resources */,
+				2ED8AD4B188ACB39004B8CD3 /* BAChomePreview@2x.png in Resources */,
 				2ECA9752188A225700994289 /* InfoPlist.strings in Resources */,
+				2ED8AD49188ACB39004B8CD3 /* BAChomePreview.png in Resources */,
 				2ECA975B188A225700994289 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -488,6 +517,7 @@
 				2ED8AD31188AA2CA004B8CD3 /* PFBars.m in Sources */,
 				2ECA9797188A241B00994289 /* BarsViewController.m in Sources */,
 				2ECA9754188A225700994289 /* main.m in Sources */,
+				2ED8AD3D188AB20D004B8CD3 /* PFNotifications.m in Sources */,
 				2ECA979D188A242B00994289 /* ProfileViewController.m in Sources */,
 				2ECA97A0188A243200994289 /* SettingsViewController.m in Sources */,
 			);

@@ -107,7 +107,7 @@
                 } else {
                     NSString *errorString = [[error userInfo] objectForKey:@"error"];
                     NSInteger code = [error code];
-                    NSLog(@"Error: %@, %ld", errorString, code);
+                    NSLog(@"Error: %@, %ld", errorString, (long)code);
                     if (code == 125) {
                         [_activityWheel stopAnimating];
                         [_emailField becomeFirstResponder];
