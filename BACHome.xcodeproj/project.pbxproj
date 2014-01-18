@@ -42,6 +42,10 @@
 		2ECA97AF188A341E00994289 /* CGFlowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECA97AB188A341E00994289 /* CGFlowController.m */; };
 		2ECA97B0188A341E00994289 /* CGFlowInteractions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECA97AC188A341E00994289 /* CGFlowInteractions.m */; };
 		2ECA97B1188A341E00994289 /* CGFlowAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECA97AE188A341E00994289 /* CGFlowAnimations.m */; };
+		2ED8AD31188AA2CA004B8CD3 /* PFBars.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED8AD30188AA2CA004B8CD3 /* PFBars.m */; };
+		2ED8AD34188AA2D7004B8CD3 /* PFDrinks.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED8AD33188AA2D7004B8CD3 /* PFDrinks.m */; };
+		2ED8AD37188AA2E6004B8CD3 /* PFFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED8AD36188AA2E6004B8CD3 /* PFFriend.m */; };
+		2ED8AD3A188AA2F5004B8CD3 /* PFToasts.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED8AD39188AA2F5004B8CD3 /* PFToasts.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +108,14 @@
 		2ECA97AC188A341E00994289 /* CGFlowInteractions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGFlowInteractions.m; sourceTree = "<group>"; };
 		2ECA97AD188A341E00994289 /* CGFlowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGFlowController.h; sourceTree = "<group>"; };
 		2ECA97AE188A341E00994289 /* CGFlowAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGFlowAnimations.m; sourceTree = "<group>"; };
+		2ED8AD2F188AA2CA004B8CD3 /* PFBars.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFBars.h; sourceTree = "<group>"; };
+		2ED8AD30188AA2CA004B8CD3 /* PFBars.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFBars.m; sourceTree = "<group>"; };
+		2ED8AD32188AA2D7004B8CD3 /* PFDrinks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFDrinks.h; sourceTree = "<group>"; };
+		2ED8AD33188AA2D7004B8CD3 /* PFDrinks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFDrinks.m; sourceTree = "<group>"; };
+		2ED8AD35188AA2E6004B8CD3 /* PFFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFFriend.h; sourceTree = "<group>"; };
+		2ED8AD36188AA2E6004B8CD3 /* PFFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFFriend.m; sourceTree = "<group>"; };
+		2ED8AD38188AA2F5004B8CD3 /* PFToasts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFToasts.h; sourceTree = "<group>"; };
+		2ED8AD39188AA2F5004B8CD3 /* PFToasts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFToasts.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +182,14 @@
 		2E5E75BA188A83B1004AD75C /* ParseObjects */ = {
 			isa = PBXGroup;
 			children = (
+				2ED8AD2F188AA2CA004B8CD3 /* PFBars.h */,
+				2ED8AD30188AA2CA004B8CD3 /* PFBars.m */,
+				2ED8AD32188AA2D7004B8CD3 /* PFDrinks.h */,
+				2ED8AD33188AA2D7004B8CD3 /* PFDrinks.m */,
+				2ED8AD35188AA2E6004B8CD3 /* PFFriend.h */,
+				2ED8AD36188AA2E6004B8CD3 /* PFFriend.m */,
+				2ED8AD38188AA2F5004B8CD3 /* PFToasts.h */,
+				2ED8AD39188AA2F5004B8CD3 /* PFToasts.m */,
 			);
 			name = ParseObjects;
 			sourceTree = "<group>";
@@ -457,11 +477,15 @@
 				2ECA97B0188A341E00994289 /* CGFlowInteractions.m in Sources */,
 				2ECA9758188A225700994289 /* AppDelegate.m in Sources */,
 				2E5E75B4188A760E004AD75C /* LoginViewController.m in Sources */,
+				2ED8AD3A188AA2F5004B8CD3 /* PFToasts.m in Sources */,
 				2ECA97AF188A341E00994289 /* CGFlowController.m in Sources */,
+				2ED8AD34188AA2D7004B8CD3 /* PFDrinks.m in Sources */,
 				2ECA97A7188A29F300994289 /* NewsViewController.m in Sources */,
 				2ECA97B1188A341E00994289 /* CGFlowAnimations.m in Sources */,
 				2ECA97AA188A2A3200994289 /* NotificationsViewController.m in Sources */,
+				2ED8AD37188AA2E6004B8CD3 /* PFFriend.m in Sources */,
 				2E5E75B2188A760E004AD75C /* CreateAccountViewController.m in Sources */,
+				2ED8AD31188AA2CA004B8CD3 /* PFBars.m in Sources */,
 				2ECA9797188A241B00994289 /* BarsViewController.m in Sources */,
 				2ECA9754188A225700994289 /* main.m in Sources */,
 				2ECA979D188A242B00994289 /* ProfileViewController.m in Sources */,

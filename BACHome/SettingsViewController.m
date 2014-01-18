@@ -6,10 +6,12 @@
 //  Copyright (c) 2014 Revision Works, LLC. All rights reserved.
 //
 
+#import <Parse/Parse.h>
 #import "SettingsViewController.h"
 
 @interface SettingsViewController()
 -(IBAction)donePressed:(id)sender;
+-(IBAction)logoutPressed:(id)sender;
 @end
 
 @implementation SettingsViewController
@@ -24,6 +26,12 @@
 -(IBAction)donePressed:(id)sender {
     UIViewController *destController = [self.storyboard instantiateViewControllerWithIdentifier:@"CGFlowInitialScene"];
     [self.flowController flowToViewController:destController withAnimation:kCGFlowAnimationSlideDown completion:^(BOOL finished){}];
+}
+
+-(IBAction)logoutPressed:(id)sender {
+    [PFUser logOut];
+    UIViewController *loginController = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginView"];
+    [self.flowController flowToViewController:loginController withAnimation:kCGFlowAnimationSlideUp completion:^(BOOL finished){}];
 }
 
 #pragma mark - Memory Methods

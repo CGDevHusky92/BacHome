@@ -7,13 +7,16 @@
 //
 
 #import "AppDelegate.h"
+#import "PFBars.h"
+#import "PFDrinks.h"
+#import "PFFriend.h"
+#import "PFToasts.h"
 
 @implementation AppDelegate
 
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [self setupParse:launchOptions];
-    
     return YES;
 }
 							
@@ -39,7 +42,35 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    PFUser *currentUser = [PFUser currentUser];
+    if (currentUser) {
+        [currentInstallation setValue:currentUser.username forKey:@"username"];
+    }
+
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!succeeded) {
+            // The login failed. Check error to see why.
+            if ([error code] == 100) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"We're Very Sorry" message:@"It seems we can't connect to the server. Please try again later. It might be an issue with the WiFi you are currently connected to." delegate:nil cancelButtonTitle:@"Ok..." otherButtonTitles:nil, nil];
+                [alert show];
+            } else if ([error code] == -1202) {
+                NSLog(@"Error Code -1202");
+            } else {
+                NSLog(@"Error: %@", [error localizedDescription]);
+            }
+        }
+    }];
+}
+
 -(void)setupParse:(NSDictionary *)launchOptions {
+    [PFBars registerSubclass];
+    [PFDrinks registerSubclass];
+    [PFFriend registerSubclass];
+    [PFToasts registerSubclass];
+    
     [Parse setApplicationId:@"161eEMKACb4iY7WNGthB1T15n0yOg2nbNxd0Qsre" clientKey:@"P0g3zLxURHOB9YpeHenmKQorWLEmKeBEyhmSBPWx"];
     PFACL *defaultACL = [PFACL ACL];
     [defaultACL setPublicReadAccess:YES];

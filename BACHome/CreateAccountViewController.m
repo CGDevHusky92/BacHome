@@ -82,12 +82,18 @@
             user.username = [_userField text];
             user.password = [_passField text];
             user.email = [_emailField text];
-            [user setObject:[NSDate date] forKey:@"last_updated"];
-            [user setObject:[NSNumber numberWithInt:0] forKey:@"num_sent"];
-            [user setObject:[NSNumber numberWithInt:0] forKey:@"num_received"];
+//            [user setObject:[NSDate date] forKey:@"last_updated"];
             [user setObject:@"" forKey:@"phone"];
             [user setObject:@"" forKey:@"f_name"];
             [user setObject:@"" forKey:@"l_name"];
+            [user setObject:[NSNumber numberWithInt:[[_weightField text] intValue]] forKey:@"weight"];
+            
+            if ([_genderSegment selectedSegmentIndex] == 0) {
+                [user setObject:@"male" forKey:@"gender"];
+            } else {
+                [user setObject:@"female" forKey:@"gender"];
+            }
+            
             [user setObject:[NSNumber numberWithBool:NO] forKey:@"fb_user"];
             [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (!error) {
@@ -95,6 +101,7 @@
                     [_userField setText:@""];
                     [_passField setText:@""];
                     [_emailField setText:@""];
+                    [_weightField setText:@""];
                     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge| UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound];
                     [self dismissView:self];
                 } else {
@@ -198,6 +205,8 @@
     } else if (textField == _passField) {
         [_emailField becomeFirstResponder];
     } else if (textField == _emailField) {
+        [_weightField becomeFirstResponder];
+    } else if (textField == _weightField) {
         [self createPressed:textField];
     }
     return YES;
