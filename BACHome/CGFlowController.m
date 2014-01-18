@@ -138,7 +138,6 @@
     _animationType = animation;
     self.interactive = YES;
     _currentCompletion = completion;
-    
     [self presentViewController:tempController animated:animated completion:^{}];
 }
 
@@ -209,17 +208,7 @@
 }
 
 -(BOOL)shouldAutomaticallyForwardAppearanceMethods {
-    return NO;
-}
-
-#pragma mark - Rotation Delegate
-
--(NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskPortrait; //[self.statusController supportedInterfaceOrientations];
-}
-
--(BOOL)shouldAutorotate {
-    return NO;
+    return YES;
 }
 
 #pragma mark - UIStatusBar
@@ -288,140 +277,26 @@
     UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIView *containerView = [transitionContext containerView];
     
-//    [toVC.view removeFromSuperview];
-//    [self.flowController startTransition:toVC];
-//    toVC.view.bounds = fromVC.view.bounds;
-//    [containerView addSubview:toVC.view];
+    [toVC.view removeFromSuperview];
+    [self.flowController startTransition:toVC];
+    toVC.view.bounds = containerView.bounds;
+    [containerView addSubview:toVC.view];
     
-    if (self.animationType == kCGFlowAnimationFlipUp || self.animationType == kCGFlowAnimationFlipDown) {
-        // Set the frames
-        NSLog(@"Flipping Up");
-        
-        // Get the respective view controllers
-        UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-        UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
-        
-        // Get the views
-        UIView *containerView = [transitionContext containerView];
-        UIView *fromView = fromVC.view;
-        UIView *toView = toVC.view;
-        
-        // Add the toView to the container
-//        [containerView addSubview:fromView];
-        
-        [toVC.view removeFromSuperview];
-        [self.flowController startTransition:toVC];
-        toVC.view.bounds = fromVC.view.bounds;
-        [containerView addSubview:toVC.view];
-        
-        // Set the frames
-        CGRect initialFrame = [transitionContext initialFrameForViewController:fromVC];
-        CGRect finalFrame = [transitionContext finalFrameForViewController:toVC];
-        fromView.frame = initialFrame;
-        toView.frame = initialFrame;
-        
-        // Start building the transform - 3D so need perspective
-        CATransform3D transform = CATransform3DIdentity;
-        transform.m34 = -1/CGRectGetHeight(initialFrame);
-        containerView.layer.sublayerTransform = transform;
-        
-        
-        toView.layer.transform = CATransform3DMakeRotation(-1.0 * M_PI_2, 1, 0, 0);
-        [UIView animateKeyframesWithDuration:[self transitionDuration:transitionContext]
-                                       delay:0.0
-                                     options:UIViewKeyframeAnimationOptionLayoutSubviews
-                                  animations:^{
-              // First half is rotating in
-              [UIView addKeyframeWithRelativeStartTime:0.0
-                                      relativeDuration:0.5
-                                            animations:^{
-                                                fromView.layer.transform = CATransform3DMakeRotation(1.0 * M_PI_2, 1, 0, 0);
-                                            }];
-              [UIView addKeyframeWithRelativeStartTime:0.5
-                                      relativeDuration:0.49
-                                            animations:^{
-                                                toView.layer.transform = CATransform3DMakeRotation(0, 1, 0, 0);
-                                            }];
-                                      [UIView addKeyframeWithRelativeStartTime:0.99 relativeDuration:0.01 animations:^{
-                                          [toView setFrame:finalFrame];
-                                          NSLog(@"Frame set");
-                                      }];
-          } completion:^(BOOL finished) {
-//              [UIView animateWithDuration:0.0 animations:^{
-//                  [toView setFrame:finalFrame];
-//              } completion:^(BOOL finished) {
-                  [transitionContext completeTransition:YES];
-                  if ([transitionContext transitionWasCancelled]) {
-                      [self.flowController cancelTransition:toVC];
-                  } else {
-                      [self.flowController finishTransition:toVC];
-                  }
-//              }];
-              
-              
-          }];
-        
-        
-        
-        
-        
-        
-        
-//        fromVC.view.frame = containerView.bounds;
-//        toVC.view.frame = containerView.bounds;
-//        
-//        // Start building the transform - 3D so need perspective
-//        CATransform3D transform = CATransform3DIdentity;
-//        transform.m34 = -1 / CGRectGetHeight(containerView.bounds);
-//        containerView.layer.sublayerTransform = transform;
-//        
-//        toVC.view.layer.transform = CATransform3DMakeRotation(-1.0 * M_PI_2, 1, 0, 0);
-//        [UIView animateKeyframesWithDuration:[self transitionDuration:transitionContext] delay:0.0 options:UIViewKeyframeAnimationOptionBeginFromCurrentState animations:^{
-//            // First half is rotating in
-//            [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:0.5 animations:^{
-//                fromVC.view.layer.transform = CATransform3DMakeRotation(M_PI_2, 1, 0, 0);
-//            }];
-//            [UIView addKeyframeWithRelativeStartTime:0.5 relativeDuration:0.5 animations:^{
-//                toVC.view.layer.transform = CATransform3DMakeRotation(0, 1, 0, 0);
-//            }];
-//        } completion:^(BOOL finished) {
-//            if (finished) {
-//                [transitionContext completeTransition:YES];
-//                if ([transitionContext transitionWasCancelled]) {
-//                    [self.flowController cancelTransition:toVC];
-//                } else {
-//                    [self.flowController finishTransition:toVC];
-//                }
-//            }
-//        }];
-    } else {
-        [toVC.view removeFromSuperview];
-        [self.flowController startTransition:toVC];
-        toVC.view.bounds = containerView.bounds;
-        [containerView addSubview:toVC.view];
-        
-        [CGFlowAnimations flowAnimation:self.animationType fromSource:fromVC toDestination:toVC withContainer:containerView andDuration:[self transitionDuration:transitionContext] withOrientation:[fromVC interfaceOrientation] interactively:_interactive completion:^(BOOL finished) {
-            if (finished) {
-                [transitionContext completeTransition:YES];
-                if ([transitionContext transitionWasCancelled]) {
-                    [self.flowController cancelTransition:toVC];
-                } else {
-                    [self.flowController finishTransition:toVC];
-                }
+    [CGFlowAnimations flowAnimation:self.animationType fromSource:fromVC toDestination:toVC withContainer:containerView andDuration:[self transitionDuration:transitionContext] withOrientation:[fromVC interfaceOrientation] interactively:_interactive completion:^(BOOL finished) {
+        if (finished) {
+            [transitionContext completeTransition:YES];
+            if ([transitionContext transitionWasCancelled]) {
+                [self.flowController cancelTransition:toVC];
+            } else {
+                [self.flowController finishTransition:toVC];
             }
-        }];
-    }
+        }
+    }];
 }
 
 @end
 
 @interface CGFlowInteractor() <UIGestureRecognizerDelegate>
-@property (nonatomic, strong, readwrite) UIScreenEdgePanGestureRecognizer *edgeGesture;
-@property (nonatomic, strong, readwrite) UIPanGestureRecognizer *panGesture;
-@property (nonatomic, strong, readwrite) UILongPressGestureRecognizer *pressGesture;
-@property (nonatomic, strong, readwrite) UIPinchGestureRecognizer *pinchGesture;
-@property (nonatomic, strong, readwrite) UIRotationGestureRecognizer *rotateGesture;
-@property (nonatomic, strong, readwrite) UITapGestureRecognizer *tapGesture;
 @property (nonatomic, assign) kCGFlowInteractionType interactorType;
 @end
 
@@ -430,95 +305,9 @@
 -(void)setFlowController:(CGFlowController *)flowController {
     _flowController = flowController;
     _interactorType = kCGFlowInteractionNone;
-    
-//    UILongPressGestureRecognizer *longGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
-//    UILongPressGestureRecognizer *longDoubleGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
-//    UILongPressGestureRecognizer *longTripleGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
-//    UIScreenEdgePanGestureRecognizer *edgeGesture = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
-    UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
-//    UIRotationGestureRecognizer *rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
-//    UITapGestureRecognizer *singleTapGesture = [[UITapGestureRecognizer alloc]  initWithTarget:self action:@selector(handleGesture:)];
-//    UITapGestureRecognizer *doubleTapGesture = [[UITapGestureRecognizer alloc]  initWithTarget:self action:@selector(handleGesture:)];
-//    UITapGestureRecognizer *tripleTapGesture = [[UITapGestureRecognizer alloc]  initWithTarget:self action:@selector(handleGesture:)];
-//    UITapGestureRecognizer *singleDoubleTapGesture = [[UITapGestureRecognizer alloc]  initWithTarget:self action:@selector(handleGesture:)];
-//    UITapGestureRecognizer *doubleDoubleTapGesture = [[UITapGestureRecognizer alloc]  initWithTarget:self action:@selector(handleGesture:)];
-//    UITapGestureRecognizer *tripleDoubleTapGesture = [[UITapGestureRecognizer alloc]  initWithTarget:self action:@selector(handleGesture:)];
-//    UITapGestureRecognizer *singleTripleTapGesture = [[UITapGestureRecognizer alloc]  initWithTarget:self action:@selector(handleGesture:)];
-//    UITapGestureRecognizer *doubleTripleTapGesture = [[UITapGestureRecognizer alloc]  initWithTarget:self action:@selector(handleGesture:)];
-//    UITapGestureRecognizer *tripleTripleTapGesture = [[UITapGestureRecognizer alloc]  initWithTarget:self action:@selector(handleGesture:)];
-    
-//    [longGesture setCancelsTouchesInView:NO];
-//    [longDoubleGesture setCancelsTouchesInView:NO];
-//    [longTripleGesture setCancelsTouchesInView:NO];
     [panGesture setCancelsTouchesInView:NO];
-//    [edgeGesture setCancelsTouchesInView:NO];
-    [pinchGesture setCancelsTouchesInView:NO];
-//    [rotationGesture setCancelsTouchesInView:NO];
-    
-//    [singleTapGesture setCancelsTouchesInView:NO];
-//    [doubleTapGesture setCancelsTouchesInView:NO];
-//    [tripleTapGesture setCancelsTouchesInView:NO];
-//    [singleDoubleTapGesture setCancelsTouchesInView:NO];
-//    [doubleDoubleTapGesture setCancelsTouchesInView:NO];
-//    [tripleDoubleTapGesture setCancelsTouchesInView:NO];
-//    [singleTripleTapGesture setCancelsTouchesInView:NO];
-//    [doubleTripleTapGesture setCancelsTouchesInView:NO];
-//    [tripleTripleTapGesture setCancelsTouchesInView:NO];
-    
-//    [longGesture setMinimumPressDuration:1.5];
-//    [longDoubleGesture setMinimumPressDuration:1.5];
-//    [longTripleGesture setMinimumPressDuration:1.5];
-    
-//    [singleTapGesture setNumberOfTapsRequired:1];
-//    [singleTapGesture setNumberOfTouchesRequired:1];
-//    [doubleTapGesture setNumberOfTapsRequired:2];
-//    [doubleTapGesture setNumberOfTouchesRequired:1];
-//    [tripleTapGesture setNumberOfTapsRequired:3];
-//    [tripleTapGesture setNumberOfTouchesRequired:1];
-//    [singleDoubleTapGesture setNumberOfTapsRequired:1];
-//    [singleDoubleTapGesture setNumberOfTouchesRequired:2];
-//    [doubleDoubleTapGesture setNumberOfTapsRequired:2];
-//    [doubleDoubleTapGesture setNumberOfTouchesRequired:2];
-//    [tripleDoubleTapGesture setNumberOfTapsRequired:3];
-//    [tripleDoubleTapGesture setNumberOfTouchesRequired:2];
-//    [singleTripleTapGesture setNumberOfTapsRequired:1];
-//    [singleTripleTapGesture setNumberOfTouchesRequired:3];
-//    [doubleTripleTapGesture setNumberOfTapsRequired:2];
-//    [doubleTripleTapGesture setNumberOfTouchesRequired:3];
-//    [tripleTripleTapGesture setNumberOfTapsRequired:3];
-//    [tripleTripleTapGesture setNumberOfTouchesRequired:3];
-    
-//    [edgeGesture requireGestureRecognizerToFail:panGesture];
-//    [longGesture requireGestureRecognizerToFail:longDoubleGesture];
-//    [longGesture requireGestureRecognizerToFail:longTripleGesture];
-//    [longDoubleGesture requireGestureRecognizerToFail:longTripleGesture];
-//    [singleTapGesture requireGestureRecognizerToFail:doubleTapGesture];
-//    [singleTapGesture requireGestureRecognizerToFail:tripleTapGesture];
-//    [doubleTapGesture requireGestureRecognizerToFail:tripleTapGesture];
-//    [singleDoubleTapGesture requireGestureRecognizerToFail:doubleDoubleTapGesture];
-//    [singleDoubleTapGesture requireGestureRecognizerToFail:tripleDoubleTapGesture];
-//    [doubleDoubleTapGesture requireGestureRecognizerToFail:tripleDoubleTapGesture];
-//    [singleTripleTapGesture requireGestureRecognizerToFail:doubleTripleTapGesture];
-//    [singleTripleTapGesture requireGestureRecognizerToFail:tripleTripleTapGesture];
-//    [doubleTripleTapGesture requireGestureRecognizerToFail:tripleTripleTapGesture];
-    
-//    [_flowController.view addGestureRecognizer:longGesture];
-//    [_flowController.view addGestureRecognizer:longDoubleGesture];
-//    [_flowController.view addGestureRecognizer:longTripleGesture];
     [_flowController.view addGestureRecognizer:panGesture];
-//    [_flowController.view addGestureRecognizer:edgeGesture];
-    [_flowController.view addGestureRecognizer:pinchGesture];
-//    [_flowController.view addGestureRecognizer:rotationGesture];
-//    [_flowController.view addGestureRecognizer:singleTapGesture];
-//    [_flowController.view addGestureRecognizer:doubleTapGesture];
-//    [_flowController.view addGestureRecognizer:tripleTapGesture];
-//    [_flowController.view addGestureRecognizer:singleDoubleTapGesture];
-//    [_flowController.view addGestureRecognizer:doubleDoubleTapGesture];
-//    [_flowController.view addGestureRecognizer:tripleDoubleTapGesture];
-//    [_flowController.view addGestureRecognizer:singleTripleTapGesture];
-//    [_flowController.view addGestureRecognizer:doubleTripleTapGesture];
-//    [_flowController.view addGestureRecognizer:tripleTripleTapGesture];
 }
 
 #pragma mark - Gesture Handler
@@ -549,11 +338,6 @@
         default:
             break;
     }
-}
-
-
--(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    return YES;
 }
 
 @end
@@ -633,6 +417,9 @@ static char lowestLevelKey;
 -(void)setTransitioning:(BOOL)transition {
     NSNumber *number = [NSNumber numberWithBool:transition];
     objc_setAssociatedObject(self, &transitioningKey, number, OBJC_ASSOCIATION_RETAIN);
+    for (UIViewController *childController in self.childViewControllers) {
+        [childController setTransitioning:transition];
+    }
 }
 
 -(BOOL)transitioning {

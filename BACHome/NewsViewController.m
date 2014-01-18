@@ -8,7 +8,7 @@
 
 #import "NewsViewController.h"
 
-@interface NewsViewController()
+@interface NewsViewController() <UINavigationControllerDelegate>
 @property (nonatomic, strong) NSMutableArray *newsArray;
 -(IBAction)barsPressed:(id)sender;
 -(IBAction)toastsPressed:(id)sender;
@@ -26,6 +26,13 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    if (self.transitioning) {
+        [super viewWillAppear:animated];
+        
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -105,6 +112,24 @@
     } else if (type == kCGFlowInteractionSwipeRight) {
         destController = [self.storyboard instantiateViewControllerWithIdentifier:@"FriendsView"];
         [self.flowController flowInteractivelyToViewController:destController withAnimation:kCGFlowAnimationSlideRight completion:^(BOOL finished){}];
+    }
+}
+
+#pragma mark - UINavigationControllerDelegate
+
+-(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if ([viewController isEqual:self]) {
+        [viewController viewWillAppear:animated];
+    } else if ([viewController conformsToProtocol:@protocol(UINavigationControllerDelegate)]) {
+        // Set the navigation controller delegate to the passed-in view controller and call the UINavigationViewControllerDelegate method on the new delegate.
+        [navigationController setDelegate:(id<UINavigationControllerDelegate>)viewController];
+        [[navigationController delegate] navigationController:navigationController willShowViewController:viewController animated:YES];
+    }
+}
+
+-(void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if ([viewController isEqual:self]) {
+        [self viewDidAppear:animated];
     }
 }
 

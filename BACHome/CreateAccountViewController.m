@@ -15,8 +15,9 @@
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UITextField *passField;
 @property (nonatomic, weak) IBOutlet UITextField *emailField;
+@property (nonatomic, weak) IBOutlet UITextField *weightField;
+@property (nonatomic, weak) IBOutlet UISegmentedControl *genderSegment;
 @property (nonatomic, weak) IBOutlet UIButton *createButton;
-@property (nonatomic, weak) IBOutlet UIButton *backButton;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityWheel;
 -(IBAction)createPressed:(id)sender;
 @end
@@ -35,18 +36,24 @@
     _userField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:userText attributes:@{NSForegroundColorAttributeName: color}];
     _passField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:passText attributes:@{NSForegroundColorAttributeName: color}];
     _emailField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:emailText attributes:@{NSForegroundColorAttributeName: color}];
-    
+    _weightField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Weight" attributes:@{NSForegroundColorAttributeName: color}];
     [_titleLabel setFont:[UIFont systemFontOfSize:24.0]];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    if (self.transitioning) {
+        [_userField becomeFirstResponder];
+        [super viewDidAppear:animated];
+    }
 }
 
 -(IBAction)createPressed:(id)sender {
     [_activityWheel startAnimating];
-    
     [_createButton setEnabled:NO];
-    [_backButton setEnabled:NO];
     [_userField resignFirstResponder];
     [_passField resignFirstResponder];
     [_emailField resignFirstResponder];
+    [_weightField resignFirstResponder];
     
     UIAlertView *alert;
     PFUser *user = [PFUser user];
@@ -63,6 +70,10 @@
     
     if ([[_emailField text] isEqualToString:@""]) {
         check += 5;
+    }
+    
+    if ([[_weightField text] isEqualToString:@""]) {
+        check = 10;
     }
     
     switch (check) {
@@ -108,7 +119,6 @@
                     }
                 }
                 [_createButton setEnabled:YES];
-                [_backButton setEnabled:YES];
             }];
         }
             break;
@@ -119,7 +129,6 @@
             alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Either No Username Entered Or It Has Too Many Characters" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             [alert show];
             [_createButton setEnabled:YES];
-            [_backButton setEnabled:YES];
             break;
         case 3:
             // Error no password chosen
@@ -128,7 +137,6 @@
             alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Either No Password Entered Or It Has Too Many Characters" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             [alert show];
             [_createButton setEnabled:YES];
-            [_backButton setEnabled:YES];
             break;
         case 4:
             // Error no username or password chosen
@@ -137,7 +145,6 @@
             alert = [[UIAlertView alloc] initWithTitle:@" Multiple Errors" message:@"Either No Username Entered Or It Has Too Many Characters, Either No Password Entered Or It Has Too Many Characters" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             [alert show];
             [_createButton setEnabled:YES];
-            [_backButton setEnabled:YES];
             break;
         case 5:
             // Error no email chosen
@@ -146,7 +153,6 @@
             alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No Email Entered" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             [alert show];
             [_createButton setEnabled:YES];
-            [_backButton setEnabled:YES];
             break;
         case 6:
             // Error no username or email chosen
@@ -155,7 +161,6 @@
             alert = [[UIAlertView alloc] initWithTitle:@"Multiple Errors" message:@"Either No Username Or It Has Too Many Characters, No Email Entered" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             [alert show];
             [_createButton setEnabled:YES];
-            [_backButton setEnabled:YES];
             break;
         case 8:
             // Error no password or email chosen
@@ -164,7 +169,6 @@
             alert = [[UIAlertView alloc] initWithTitle:@"Multiple Errors" message:@"No Password Or It Has Too Many Characters, No Email Entered" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             [alert show];
             [_createButton setEnabled:YES];
-            [_backButton setEnabled:YES];
             break;
         case 9:
             // Error no username, password, or email chosen
@@ -173,12 +177,10 @@
             alert = [[UIAlertView alloc] initWithTitle:@"Multiple Errors" message:@"Either No Username Or It Has Too Many Characters, Either No Password Or It Has Too Many Characters, And No Email Entered" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             [alert show];
             [_createButton setEnabled:YES];
-            [_backButton setEnabled:YES];
             break;
         default:
             [_activityWheel stopAnimating];
             [_createButton setEnabled:YES];
-            [_backButton setEnabled:YES];
             NSLog(@"Error: Unknown Error Code %d", check);
             break;
     }
