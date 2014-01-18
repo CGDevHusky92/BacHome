@@ -23,20 +23,28 @@
     return self;
 }
 
--(void)setUsername:(NSString *)username {
-    [self setObject:username forKey:@"username"];
+-(void)setSender:(NSString *)sender {
+    [self setObject:sender forKey:@"sender"];
 }
 
--(NSString *)username {
-    return [self objectForKey:@"username"];
+-(NSString *)sender {
+    return [self objectForKey:@"sender"];
 }
 
--(void)setMessage:(NSString *)message {
-    [self setObject:message forKey:@"message"];
+-(void)setReceiver:(NSString *)receiver {
+    [self setObject:receiver forKey:@"receiver"];
 }
 
--(NSString *)message {
-    return [self objectForKey:@"message"];
+-(NSString *)receiver {
+    return [self objectForKey:@"receiver"];
+}
+
+-(void)setType:(NSString *)type {
+    [self setObject:type forKey:@"type"];
+}
+
+-(NSString *)type {
+    return [self objectForKey:@"type"];
 }
 
 @end

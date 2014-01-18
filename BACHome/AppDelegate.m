@@ -7,9 +7,13 @@
 //
 
 #import "AppDelegate.h"
-#import "PFBars.h"
-#import "PFDrinks.h"
-#import "PFFriend.h"
+
+#import "PFBadges.h"
+#import "PFBadgesLookup.h"
+#import "PFBarLookup.h"
+#import "PFDrinksLookup.h"
+#import "PFFriends.h"
+#import "PFNotifications.h"
 #import "PFToasts.h"
 
 @implementation AppDelegate
@@ -66,9 +70,12 @@
 }
 
 -(void)setupParse:(NSDictionary *)launchOptions {
-    [PFBars registerSubclass];
-    [PFDrinks registerSubclass];
-    [PFFriend registerSubclass];
+    [PFBadges registerSubclass];
+    [PFBadgesLookup registerSubclass];
+    [PFBarLookup registerSubclass];
+    [PFDrinksLookup registerSubclass];
+    [PFFriends registerSubclass];
+    [PFNotifications registerSubclass];
     [PFToasts registerSubclass];
     
     [Parse setApplicationId:@"161eEMKACb4iY7WNGthB1T15n0yOg2nbNxd0Qsre" clientKey:@"P0g3zLxURHOB9YpeHenmKQorWLEmKeBEyhmSBPWx"];

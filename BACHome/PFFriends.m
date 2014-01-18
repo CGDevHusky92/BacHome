@@ -1,5 +1,5 @@
 //
-//  PFFriend.m
+//  PFFriends.m
 //  BACHome
 //
 //  Created by Chase Gorectke on 1/18/14.
@@ -7,12 +7,12 @@
 //
 
 #import <Parse/PFObject+Subclass.h>
-#import "PFFriend.h"
+#import "PFFriends.h"
 
-@implementation PFFriend
+@implementation PFFriends
 
 +(NSString *)parseClassName {
-  	return @"Friend";
+  	return @"Friends";
 }
 
 -(id)initWithDefaults {
@@ -31,12 +31,12 @@
     return [self objectForKey:@"you"];
 }
 
--(void)setI:(NSString *)i {
-    [self setObject:i forKey:@"i"];
+-(void)setMe:(NSString *)me {
+    [self setObject:me forKey:@"me"];
 }
 
--(NSString *)i {
-    return [self objectForKey:@"i"];
+-(NSString *)me {
+    return [self objectForKey:@"me"];
 }
 
 @end

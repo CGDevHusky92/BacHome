@@ -1,5 +1,5 @@
 //
-//  PFDrinks.m
+//  PFDrinksLookup.m
 //  BACHome
 //
 //  Created by Chase Gorectke on 1/18/14.
@@ -7,12 +7,12 @@
 //
 
 #import <Parse/PFObject+Subclass.h>
-#import "PFDrinks.h"
+#import "PFDrinksLookup.h"
 
-@implementation PFDrinks
+@implementation PFDrinksLookup
 
 +(NSString *)parseClassName {
-  	return @"Drinks";
+  	return @"DrinksLookup";
 }
 
 -(id)initWithDefaults {

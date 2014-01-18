@@ -1,5 +1,5 @@
 //
-//  PFBars.m
+//  PFBarLookup.m
 //  BACHome
 //
 //  Created by Chase Gorectke on 1/18/14.
@@ -7,12 +7,12 @@
 //
 
 #import <Parse/PFObject+Subclass.h>
-#import "PFBars.h"
+#import "PFBarLookup.h"
 
-@implementation PFBars
+@implementation PFBarLookup
 
 +(NSString *)parseClassName {
-  	return @"Bars";
+  	return @"BarLookup";
 }
 
 -(id)initWithDefaults {
@@ -29,6 +29,14 @@
 
 -(NSString *)name {
 	return [self objectForKey:@"name"];
+}
+
+-(void)setDescription:(NSString *)description {
+	[self setObject:description forKey:@"description"];
+}
+
+-(NSString *)description {
+	return [self objectForKey:@"description"];
 }
 
 @end
