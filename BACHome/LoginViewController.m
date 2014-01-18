@@ -86,7 +86,9 @@
     [_userField resignFirstResponder];
     [_passField resignFirstResponder];
     
-#warning load create account
+    UIViewController *createController = [self.storyboard instantiateViewControllerWithIdentifier:@"CreateAccountView"];
+//    [self.flowController flowToViewController:createController withAnimation:kCGFlowAnimationSlideLeft completion:^(BOOL finished){}];
+    [self.navigationController pushViewController:createController animated:YES];
 }
 
 -(IBAction)forgotPressed:(id)sender {
@@ -105,7 +107,8 @@
 }
 
 -(void)dismissView:(id)sender {
-#warning flow to main controller
+    UIViewController *newsController = [self.storyboard instantiateViewControllerWithIdentifier:@"CGFlowInitialScene"];
+    [self.flowController flowToViewController:newsController withAnimation:kCGFlowAnimationSlideDown completion:^(BOOL finished){}];
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {

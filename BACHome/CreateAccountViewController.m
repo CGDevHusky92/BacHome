@@ -9,6 +9,7 @@
 
 #import <Parse/Parse.h>
 #import "CreateAccountViewController.h"
+#import "CGFlowController.h"
 
 @interface CreateAccountViewController() <UITextFieldDelegate>
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
@@ -84,8 +85,7 @@
                     [_passField setText:@""];
                     [_emailField setText:@""];
                     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge| UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound];
-//                    [_parentController dismissAccountCreator:self];
-#warning dump modal
+                    [self dismissView:self];
                 } else {
                     NSString *errorString = [[error userInfo] objectForKey:@"error"];
                     NSInteger code = [error code];
@@ -182,6 +182,11 @@
             NSLog(@"Error: Unknown Error Code %d", check);
             break;
     }
+}
+
+-(void)dismissView:(id)sender {
+    UIViewController *newsController = [self.storyboard instantiateViewControllerWithIdentifier:@"CGFlowInitialScene"];
+    [self.flowController flowToViewController:newsController withAnimation:kCGFlowAnimationSlideDown completion:^(BOOL finished){}];
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {

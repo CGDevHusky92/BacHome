@@ -28,6 +28,16 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    if (self.transitioning) {
+        if (![PFUser currentUser]) {
+            UIViewController *loginController = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginView"];
+            [self.flowController flowToViewController:loginController withAnimation:kCGFlowAnimationSlideUp completion:^(BOOL finished){}];
+        }
+        [super viewDidAppear:animated];
+    }
+}
+
 #pragma mark - Button Delegate
 
 -(IBAction)barsPressed:(id)sender {

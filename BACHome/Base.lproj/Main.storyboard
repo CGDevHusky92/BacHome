@@ -299,25 +299,10 @@
             </objects>
             <point key="canvasLocation" x="1097" y="756"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="gat-nc-W3g">
-            <objects>
-                <navigationController storyboardIdentifier="CreateView" definesPresentationContext="YES" id="mO6-Ba-Ofl" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8e5-is-oBS">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="KjS-au-Kos" kind="relationship" relationship="rootViewController" id="XW9-k4-8gj"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ARM-SZ-vP2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="647" y="1473"/>
-        </scene>
         <!--Create Account View Controller - Create Account-->
         <scene sceneID="f6W-0J-Zix">
             <objects>
-                <viewController id="KjS-au-Kos" customClass="CreateAccountViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateAccountView" id="KjS-au-Kos" customClass="CreateAccountViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xJ2-tp-ieV"/>
                         <viewControllerLayoutGuide type="bottom" id="vou-uk-yNQ"/>
@@ -382,6 +367,7 @@
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Create Account" id="scN-dg-mbf"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="activityWheel" destination="Cik-YF-4pT" id="qNK-Dg-rgo"/>
                         <outlet property="createButton" destination="ZIO-hV-g2J" id="tGd-2H-C3p"/>
@@ -392,7 +378,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zfm-k8-kLf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1097" y="1473"/>
+            <point key="canvasLocation" x="1547" y="756"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YQ5-BF-qbp">

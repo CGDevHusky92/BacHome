@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 #import "CGFlowController.h"
 
 @interface NewsViewController : UITableViewController

@@ -12,8 +12,7 @@
 
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [Parse setApplicationId:@"161eEMKACb4iY7WNGthB1T15n0yOg2nbNxd0Qsre"
-                  clientKey:@"P0g3zLxURHOB9YpeHenmKQorWLEmKeBEyhmSBPWx"];
+    [self setupParse:launchOptions];
     
     return YES;
 }
@@ -40,6 +39,12 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-#pragma mark - CGFlowDelegateControlProtocol
+-(void)setupParse:(NSDictionary *)launchOptions {
+    [Parse setApplicationId:@"161eEMKACb4iY7WNGthB1T15n0yOg2nbNxd0Qsre" clientKey:@"P0g3zLxURHOB9YpeHenmKQorWLEmKeBEyhmSBPWx"];
+    PFACL *defaultACL = [PFACL ACL];
+    [defaultACL setPublicReadAccess:YES];
+    [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+}
 
 @end
