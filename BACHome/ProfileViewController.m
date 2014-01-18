@@ -54,6 +54,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     _doneEditButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneEditPressed:)];
+    _placeImage.layer.cornerRadius = 60.0f;
+    _placeImage.layer.masksToBounds = YES;
     [self refreshLabels];
 }
 
