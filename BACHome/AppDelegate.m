@@ -10,7 +10,7 @@
 
 #import "PFBadges.h"
 #import "PFBadgesLookup.h"
-#import "PFBarLookup.h"
+#import "PFBarsLookup.h"
 #import "PFDrinksLookup.h"
 #import "PFFriends.h"
 #import "PFNotifications.h"
@@ -72,7 +72,7 @@
 -(void)setupParse:(NSDictionary *)launchOptions {
     [PFBadges registerSubclass];
     [PFBadgesLookup registerSubclass];
-    [PFBarLookup registerSubclass];
+    [PFBarsLookup registerSubclass];
     [PFDrinksLookup registerSubclass];
     [PFFriends registerSubclass];
     [PFNotifications registerSubclass];

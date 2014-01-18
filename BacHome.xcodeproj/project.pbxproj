@@ -42,7 +42,8 @@
 		2ECA97AF188A341E00994289 /* CGFlowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECA97AB188A341E00994289 /* CGFlowController.m */; };
 		2ECA97B0188A341E00994289 /* CGFlowInteractions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECA97AC188A341E00994289 /* CGFlowInteractions.m */; };
 		2ECA97B1188A341E00994289 /* CGFlowAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECA97AE188A341E00994289 /* CGFlowAnimations.m */; };
-		2ED8AD31188AA2CA004B8CD3 /* PFBarLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED8AD30188AA2CA004B8CD3 /* PFBarLookup.m */; };
+		2ED0C640188B112400B65265 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2ED0C63F188B112400B65265 /* FontAwesome.ttf */; };
+		2ED8AD31188AA2CA004B8CD3 /* PFBarsLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED8AD30188AA2CA004B8CD3 /* PFBarsLookup.m */; };
 		2ED8AD34188AA2D7004B8CD3 /* PFDrinksLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED8AD33188AA2D7004B8CD3 /* PFDrinksLookup.m */; };
 		2ED8AD37188AA2E6004B8CD3 /* PFFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED8AD36188AA2E6004B8CD3 /* PFFriends.m */; };
 		2ED8AD3A188AA2F5004B8CD3 /* PFToasts.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED8AD39188AA2F5004B8CD3 /* PFToasts.m */; };
@@ -51,6 +52,8 @@
 		2ED8AD4B188ACB39004B8CD3 /* BAChomePreview@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ED8AD48188ACB39004B8CD3 /* BAChomePreview@2x.png */; };
 		2ED8AD4F188AD293004B8CD3 /* PFBadges.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED8AD4E188AD293004B8CD3 /* PFBadges.m */; };
 		2ED8AD52188AD2A9004B8CD3 /* PFBadgesLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED8AD51188AD2A9004B8CD3 /* PFBadgesLookup.m */; };
+		2ED8AD55188AE6C5004B8CD3 /* TableIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ED8AD53188AE6C5004B8CD3 /* TableIcon.png */; };
+		2ED8AD56188AE6C5004B8CD3 /* TableIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ED8AD54188AE6C5004B8CD3 /* TableIcon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,21 +81,20 @@
 		2E5E75C1188A8453004AD75C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		2E5E75C2188A8453004AD75C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		2E5E75C3188A8453004AD75C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		2ECA9744188A225600994289 /* BACHome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BACHome.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2ECA9744188A225600994289 /* BacHome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BacHome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ECA9747188A225600994289 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2ECA9749188A225600994289 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2ECA974B188A225600994289 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		2ECA974F188A225700994289 /* BACHome-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BACHome-Info.plist"; sourceTree = "<group>"; };
 		2ECA9751188A225700994289 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2ECA9753188A225700994289 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2ECA9755188A225700994289 /* BACHome-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BACHome-Prefix.pch"; sourceTree = "<group>"; };
+		2ECA9755188A225700994289 /* BacHome-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BacHome-Prefix.pch"; sourceTree = "<group>"; };
 		2ECA9756188A225700994289 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2ECA9757188A225700994289 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2ECA975A188A225700994289 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2ECA975F188A225700994289 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		2ECA9765188A225700994289 /* BACHomeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BACHomeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2ECA9765188A225700994289 /* BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_renameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_renameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ECA9766188A225700994289 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		2ECA976E188A225700994289 /* BACHomeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BACHomeTests-Info.plist"; sourceTree = "<group>"; };
+		2ECA976E188A225700994289 /* BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_renameTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_renameTests-Info.plist"; sourceTree = "<group>"; };
 		2ECA9770188A225700994289 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2ECA9772188A225700994289 /* BACHomeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BACHomeTests.m; sourceTree = "<group>"; };
 		2ECA9795188A241B00994289 /* BarsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarsViewController.h; sourceTree = "<group>"; };
@@ -113,8 +115,10 @@
 		2ECA97AC188A341E00994289 /* CGFlowInteractions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGFlowInteractions.m; sourceTree = "<group>"; };
 		2ECA97AD188A341E00994289 /* CGFlowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGFlowController.h; sourceTree = "<group>"; };
 		2ECA97AE188A341E00994289 /* CGFlowAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGFlowAnimations.m; sourceTree = "<group>"; };
-		2ED8AD2F188AA2CA004B8CD3 /* PFBarLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFBarLookup.h; sourceTree = "<group>"; };
-		2ED8AD30188AA2CA004B8CD3 /* PFBarLookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFBarLookup.m; sourceTree = "<group>"; };
+		2ED0C63F188B112400B65265 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		2ED0C641188B127D00B65265 /* BacHome-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "BacHome-Info.plist"; sourceTree = "<group>"; };
+		2ED8AD2F188AA2CA004B8CD3 /* PFBarsLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFBarsLookup.h; sourceTree = "<group>"; };
+		2ED8AD30188AA2CA004B8CD3 /* PFBarsLookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFBarsLookup.m; sourceTree = "<group>"; };
 		2ED8AD32188AA2D7004B8CD3 /* PFDrinksLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFDrinksLookup.h; sourceTree = "<group>"; };
 		2ED8AD33188AA2D7004B8CD3 /* PFDrinksLookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFDrinksLookup.m; sourceTree = "<group>"; };
 		2ED8AD35188AA2E6004B8CD3 /* PFFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFFriends.h; sourceTree = "<group>"; };
@@ -129,6 +133,8 @@
 		2ED8AD4E188AD293004B8CD3 /* PFBadges.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFBadges.m; sourceTree = "<group>"; };
 		2ED8AD50188AD2A9004B8CD3 /* PFBadgesLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFBadgesLookup.h; sourceTree = "<group>"; };
 		2ED8AD51188AD2A9004B8CD3 /* PFBadgesLookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFBadgesLookup.m; sourceTree = "<group>"; };
+		2ED8AD53188AE6C5004B8CD3 /* TableIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableIcon.png; sourceTree = "<group>"; };
+		2ED8AD54188AE6C5004B8CD3 /* TableIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TableIcon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,8 +205,8 @@
 				2ED8AD4E188AD293004B8CD3 /* PFBadges.m */,
 				2ED8AD50188AD2A9004B8CD3 /* PFBadgesLookup.h */,
 				2ED8AD51188AD2A9004B8CD3 /* PFBadgesLookup.m */,
-				2ED8AD2F188AA2CA004B8CD3 /* PFBarLookup.h */,
-				2ED8AD30188AA2CA004B8CD3 /* PFBarLookup.m */,
+				2ED8AD2F188AA2CA004B8CD3 /* PFBarsLookup.h */,
+				2ED8AD30188AA2CA004B8CD3 /* PFBarsLookup.m */,
 				2ED8AD32188AA2D7004B8CD3 /* PFDrinksLookup.h */,
 				2ED8AD33188AA2D7004B8CD3 /* PFDrinksLookup.m */,
 				2ED8AD35188AA2E6004B8CD3 /* PFFriends.h */,
@@ -216,8 +222,8 @@
 		2ECA973B188A225600994289 = {
 			isa = PBXGroup;
 			children = (
-				2ECA974D188A225600994289 /* BACHome */,
-				2ECA976C188A225700994289 /* BACHomeTests */,
+				2ECA974D188A225600994289 /* BacHome */,
+				2ECA976C188A225700994289 /* BacHomeTests */,
 				2ECA9746188A225600994289 /* Frameworks */,
 				2ECA9745188A225600994289 /* Products */,
 			);
@@ -226,8 +232,8 @@
 		2ECA9745188A225600994289 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2ECA9744188A225600994289 /* BACHome.app */,
-				2ECA9765188A225700994289 /* BACHomeTests.xctest */,
+				2ECA9744188A225600994289 /* BacHome.app */,
+				2ECA9765188A225700994289 /* BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_renameTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -253,7 +259,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		2ECA974D188A225600994289 /* BACHome */ = {
+		2ECA974D188A225600994289 /* BacHome */ = {
 			isa = PBXGroup;
 			children = (
 				2ECA97A1188A24B400994289 /* AppDelegate */,
@@ -266,6 +272,7 @@
 				2ECA977C188A226300994289 /* CGFlow */,
 				2ECA974E188A225700994289 /* Supporting Files */,
 			);
+			name = BacHome;
 			path = BACHome;
 			sourceTree = "<group>";
 		};
@@ -273,29 +280,31 @@
 			isa = PBXGroup;
 			children = (
 				2ECA975F188A225700994289 /* Images.xcassets */,
+				2ED0C63F188B112400B65265 /* FontAwesome.ttf */,
 				2ED8AD4C188ACB40004B8CD3 /* Images */,
 				2ECA9753188A225700994289 /* main.m */,
 				2ECA9750188A225700994289 /* InfoPlist.strings */,
-				2ECA974F188A225700994289 /* BACHome-Info.plist */,
-				2ECA9755188A225700994289 /* BACHome-Prefix.pch */,
+				2ED0C641188B127D00B65265 /* BacHome-Info.plist */,
+				2ECA9755188A225700994289 /* BacHome-Prefix.pch */,
 				2ECA9759188A225700994289 /* Main.storyboard */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		2ECA976C188A225700994289 /* BACHomeTests */ = {
+		2ECA976C188A225700994289 /* BacHomeTests */ = {
 			isa = PBXGroup;
 			children = (
 				2ECA9772188A225700994289 /* BACHomeTests.m */,
 				2ECA976D188A225700994289 /* Supporting Files */,
 			);
+			name = BacHomeTests;
 			path = BACHomeTests;
 			sourceTree = "<group>";
 		};
 		2ECA976D188A225700994289 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				2ECA976E188A225700994289 /* BACHomeTests-Info.plist */,
+				2ECA976E188A225700994289 /* BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_renameTests-Info.plist */,
 				2ECA976F188A225700994289 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -408,6 +417,8 @@
 			children = (
 				2ED8AD46188ACB39004B8CD3 /* BAChomePreview.png */,
 				2ED8AD48188ACB39004B8CD3 /* BAChomePreview@2x.png */,
+				2ED8AD53188AE6C5004B8CD3 /* TableIcon.png */,
+				2ED8AD54188AE6C5004B8CD3 /* TableIcon@2x.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -415,9 +426,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2ECA9743188A225600994289 /* BACHome */ = {
+		2ECA9743188A225600994289 /* BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_rename */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2ECA9776188A225700994289 /* Build configuration list for PBXNativeTarget "BACHome" */;
+			buildConfigurationList = 2ECA9776188A225700994289 /* Build configuration list for PBXNativeTarget "BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_rename" */;
 			buildPhases = (
 				2ECA9740188A225600994289 /* Sources */,
 				2ECA9741188A225600994289 /* Frameworks */,
@@ -427,14 +438,14 @@
 			);
 			dependencies = (
 			);
-			name = BACHome;
+			name = BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_rename;
 			productName = BACHome;
-			productReference = 2ECA9744188A225600994289 /* BACHome.app */;
+			productReference = 2ECA9744188A225600994289 /* BacHome.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2ECA9764188A225700994289 /* BACHomeTests */ = {
+		2ECA9764188A225700994289 /* BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_renameTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2ECA9779188A225700994289 /* Build configuration list for PBXNativeTarget "BACHomeTests" */;
+			buildConfigurationList = 2ECA9779188A225700994289 /* Build configuration list for PBXNativeTarget "BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_renameTests" */;
 			buildPhases = (
 				2ECA9761188A225700994289 /* Sources */,
 				2ECA9762188A225700994289 /* Frameworks */,
@@ -445,9 +456,9 @@
 			dependencies = (
 				2ECA976B188A225700994289 /* PBXTargetDependency */,
 			);
-			name = BACHomeTests;
+			name = BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_renameTests;
 			productName = BACHomeTests;
-			productReference = 2ECA9765188A225700994289 /* BACHomeTests.xctest */;
+			productReference = 2ECA9765188A225700994289 /* BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_renameTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -464,7 +475,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2ECA973F188A225600994289 /* Build configuration list for PBXProject "BACHome" */;
+			buildConfigurationList = 2ECA973F188A225600994289 /* Build configuration list for PBXProject "BacHome" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -477,8 +488,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2ECA9743188A225600994289 /* BACHome */,
-				2ECA9764188A225700994289 /* BACHomeTests */,
+				2ECA9743188A225600994289 /* BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_rename */,
+				2ECA9764188A225700994289 /* BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_renameTests */,
 			);
 		};
 /* End PBXProject section */
@@ -489,10 +500,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				2ECA9760188A225700994289 /* Images.xcassets in Resources */,
+				2ED8AD55188AE6C5004B8CD3 /* TableIcon.png in Resources */,
 				2ED8AD4B188ACB39004B8CD3 /* BAChomePreview@2x.png in Resources */,
+				2ED0C640188B112400B65265 /* FontAwesome.ttf in Resources */,
 				2ECA9752188A225700994289 /* InfoPlist.strings in Resources */,
 				2ED8AD49188ACB39004B8CD3 /* BAChomePreview.png in Resources */,
 				2ECA975B188A225700994289 /* Main.storyboard in Resources */,
+				2ED8AD56188AE6C5004B8CD3 /* TableIcon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,7 +539,7 @@
 				2ED8AD37188AA2E6004B8CD3 /* PFFriends.m in Sources */,
 				2E5E75B2188A760E004AD75C /* CreateAccountViewController.m in Sources */,
 				2ED8AD4F188AD293004B8CD3 /* PFBadges.m in Sources */,
-				2ED8AD31188AA2CA004B8CD3 /* PFBarLookup.m in Sources */,
+				2ED8AD31188AA2CA004B8CD3 /* PFBarsLookup.m in Sources */,
 				2ECA9797188A241B00994289 /* BarsViewController.m in Sources */,
 				2ECA9754188A225700994289 /* main.m in Sources */,
 				2ED8AD3D188AB20D004B8CD3 /* PFNotifications.m in Sources */,
@@ -548,7 +562,7 @@
 /* Begin PBXTargetDependency section */
 		2ECA976B188A225700994289 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2ECA9743188A225600994289 /* BACHome */;
+			target = 2ECA9743188A225600994289 /* BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_rename */;
 			targetProxy = 2ECA976A188A225700994289 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -663,9 +677,9 @@
 					/Users/nbvikingsidiot001/Desktop/SourceApps/Github/BACHome,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BACHome/BACHome-Prefix.pch";
-				INFOPLIST_FILE = "BACHome/BACHome-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "BACHome/BacHome-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/BACHome/BacHome-Info.plist";
+				PRODUCT_NAME = BacHome;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -680,9 +694,9 @@
 					/Users/nbvikingsidiot001/Desktop/SourceApps/Github/BACHome,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BACHome/BACHome-Prefix.pch";
-				INFOPLIST_FILE = "BACHome/BACHome-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "BACHome/BacHome-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/BACHome/BacHome-Info.plist";
+				PRODUCT_NAME = BacHome;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -703,8 +717,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "BACHomeTests/BACHomeTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "BACHomeTests/BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_renameTests-Info.plist";
+				PRODUCT_NAME = BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_renameTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -722,8 +736,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BACHome/BACHome-Prefix.pch";
-				INFOPLIST_FILE = "BACHomeTests/BACHomeTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "BACHomeTests/BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_renameTests-Info.plist";
+				PRODUCT_NAME = BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_renameTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -732,7 +746,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2ECA973F188A225600994289 /* Build configuration list for PBXProject "BACHome" */ = {
+		2ECA973F188A225600994289 /* Build configuration list for PBXProject "BacHome" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2ECA9774188A225700994289 /* Debug */,
@@ -741,7 +755,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2ECA9776188A225700994289 /* Build configuration list for PBXNativeTarget "BACHome" */ = {
+		2ECA9776188A225700994289 /* Build configuration list for PBXNativeTarget "BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_rename" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2ECA9777188A225700994289 /* Debug */,
@@ -750,7 +764,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2ECA9779188A225700994289 /* Build configuration list for PBXNativeTarget "BACHomeTests" */ = {
+		2ECA9779188A225700994289 /* Build configuration list for PBXNativeTarget "BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_renameTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2ECA977A188A225700994289 /* Debug */,

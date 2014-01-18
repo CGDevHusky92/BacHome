@@ -19,6 +19,9 @@
     self = [super init];
     if (self) {
         // Set defaults here
+        if ([PFUser currentUser]) {
+            [self setMe:[[PFUser currentUser] username]];
+        }
     }
     return self;
 }

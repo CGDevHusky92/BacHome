@@ -7,12 +7,12 @@
 //
 
 #import <Parse/PFObject+Subclass.h>
-#import "PFBarLookup.h"
+#import "PFBarsLookup.h"
 
-@implementation PFBarLookup
+@implementation PFBarsLookup
 
 +(NSString *)parseClassName {
-  	return @"BarLookup";
+  	return @"BarsLookup";
 }
 
 -(id)initWithDefaults {

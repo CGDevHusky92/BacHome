@@ -8,7 +8,7 @@
 
 #import <Parse/Parse.h>
 
-@interface PFBarLookup : PFObject <PFSubclassing>
+@interface PFBarsLookup : PFObject <PFSubclassing>
 
 // Parse specific subclass
 +(NSString *)parseClassName;
