@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-
 #import "PFBadges.h"
 #import "PFBadgesLookup.h"
 #import "PFBarsLookup.h"

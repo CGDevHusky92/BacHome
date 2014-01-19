@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "CGFlowController.h"
 
-@interface BarsViewController : UIViewController
+@interface BarsViewController : UICollectionViewController
 
 @end

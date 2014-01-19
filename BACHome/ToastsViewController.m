@@ -11,7 +11,7 @@
 
 #import "NSString+FontAwesome.h"
 
-@interface ToastsViewController() <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface ToastsViewController() <UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate>
 @property (nonatomic, weak) IBOutlet UIButton *drinksButton;
 @property (nonatomic, weak) IBOutlet UIButton *barsButton;
 @property (nonatomic, weak) IBOutlet UIButton *postButton;
@@ -23,8 +23,10 @@
 @property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 @property (nonatomic, strong) NSString *drink;
 @property (nonatomic, strong) NSString *bars;
+
 @property (assign) BOOL drinkFlag;
 @property (assign) BOOL pickerShown;
+@property (assign) BOOL started;
 -(IBAction)cancelPressed:(id)sender;
 -(IBAction)drinksPressed:(id)sender;
 -(IBAction)barsPressed:(id)sender;
@@ -38,6 +40,7 @@
 	// Do any additional setup after loading the view.
     _drinkFlag = true;
     _pickerShown = false;
+    _started = false;
     _drinksArray = [[NSMutableArray alloc] init];
     _barsArray = [[NSMutableArray alloc] init];
     
@@ -47,6 +50,8 @@
     [_barsButton setTitle:[NSString fontAwesomeIconStringForEnum:FAMapMarker] forState:UIControlStateNormal];
     [_postButton.titleLabel setFont:[UIFont fontWithName:kFontAwesomeFamilyName size:28.0]];
     [_postButton setTitle:[NSString fontAwesomeIconStringForEnum:FAPencilSquareO] forState:UIControlStateNormal];
+    
+//    [_toastField set
     
     _tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapView:)];
     [_tapGesture setNumberOfTapsRequired:1];
@@ -132,6 +137,15 @@
         }];
         [self.presentingViewController.view removeGestureRecognizer:_tapGesture];
         [self.flowController flowDismissModalViewControllerWithCompletion:^(BOOL finished){}];
+    }
+}
+
+#pragma mark - UITextView Delegate
+
+-(void)textViewDidBeginEditing:(UITextView *)textView {
+    if (!_started) {
+        _started = YES;
+        [_toastField setText:@""];
     }
 }
 
