@@ -9,8 +9,9 @@
 #import <Parse/Parse.h>
 #import "NotificationsViewController.h"
 #import "PFNotifications.h"
+#import "PFFriends.h"
 
-@interface NotificationsViewController() <UINavigationControllerDelegate>
+@interface NotificationsViewController() <UINavigationControllerDelegate, UIAlertViewDelegate>
 @property (nonatomic, strong) NSMutableArray *notificationsArray;
 @end
 
@@ -19,12 +20,21 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     _notificationsArray = [[NSMutableArray alloc] init];
+    self.collectionView.alwaysBounceVertical = YES;
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(startRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.collectionView addSubview:refreshControl];
     [self generateListOfNotifications];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)startRefresh:(id)sender {
+    [self generateListOfNotifications];
+    [sender endRefreshing];
 }
 
 #pragma mark - Table view data source
@@ -67,18 +77,24 @@
     } else if ([[notification type] isEqualToString:@"badge"]) {
         message.text = @"Congratulations! You received a badge!";
     }
-    
     return cell;
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     PFNotifications *notification = [_notificationsArray objectAtIndex:[indexPath row]];
     if ([[notification type] isEqualToString:@"sos"]) {
-        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Will You DD?" message:[NSString stringWithFormat:@"Are you willing you to be a designated driver for %@", [[_notificationsArray objectAtIndex:[indexPath row]] objectForKey:@"sender"]] delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+        [alert setTag:[indexPath row]];
+        [alert show];
     } else if ([[notification type] isEqualToString:@"warning"]) {
-        
+        UIViewController *destController = [self.storyboard instantiateViewControllerWithIdentifier:@"SOSView"];
+        [self.flowController flowToViewController:destController withAnimation:kCGFlowAnimationSlideUp completion:^(BOOL finished){}];
     } else if ([[notification type] isEqualToString:@"friend"]) {
-        
+        PFFriends *friend = [[PFFriends alloc] initWithDefaults];
+        [friend setYou:[[_notificationsArray objectAtIndex:[indexPath row]] objectForKey:@"sender"]];
+        PFQuery *pushQuery = [PFInstallation query];
+        [pushQuery whereKey:@"username" equalTo:[[_notificationsArray objectAtIndex:[indexPath row]] objectForKey:@"sender"]];
+        [PFPush sendPushMessageToQueryInBackground:pushQuery withMessage:[NSString stringWithFormat:@"Hey %@ is following you now!", [[PFUser currentUser] username]]];
     }
 }
 
@@ -106,6 +122,18 @@
     if (type == kCGFlowInteractionSwipeRight) {
         destController = [self.storyboard instantiateViewControllerWithIdentifier:@"CGFlowInitialScene"];
         [self.flowController flowInteractivelyToViewController:destController withAnimation:kCGFlowAnimationSlideRight completion:^(BOOL finished){}];
+    }
+}
+
+#pragma mark - Alert Delegate
+
+-(void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if ([[alertView title] isEqualToString:@"Will You DD?"] && [alertView cancelButtonIndex] != buttonIndex) {
+        // Create our Installation query
+        PFQuery *pushQuery = [PFInstallation query];
+        [pushQuery whereKey:@"username" equalTo:[[_notificationsArray objectAtIndex:[alertView tag]] objectForKey:@"sender"]];
+        // Send push notification to query
+        [PFPush sendPushMessageToQueryInBackground:pushQuery withMessage:[NSString stringWithFormat:@"%@ will pick you up.", [[PFUser currentUser] username]]];
     }
 }
 

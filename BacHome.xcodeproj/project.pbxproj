@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E2B3774188BF41E001805D6 /* SOSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2B3773188BF41E001805D6 /* SOSViewController.m */; };
 		2E376DDE188B719F00FE9E13 /* TableIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E376DDB188B719F00FE9E13 /* TableIcon.png */; };
 		2E376DDF188B719F00FE9E13 /* TableIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E376DDC188B719F00FE9E13 /* TableIcon@2x.png */; };
 		2E376DE0188B719F00FE9E13 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E376DDD188B719F00FE9E13 /* icon@2x.png */; };
@@ -68,6 +69,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2E2B3772188BF41E001805D6 /* SOSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOSViewController.h; sourceTree = "<group>"; };
+		2E2B3773188BF41E001805D6 /* SOSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOSViewController.m; sourceTree = "<group>"; };
 		2E376DDB188B719F00FE9E13 /* TableIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableIcon.png; sourceTree = "<group>"; };
 		2E376DDC188B719F00FE9E13 /* TableIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TableIcon@2x.png"; sourceTree = "<group>"; };
 		2E376DDD188B719F00FE9E13 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
@@ -421,6 +424,8 @@
 		2ED8AD3E188AC46B004B8CD3 /* SOSView */ = {
 			isa = PBXGroup;
 			children = (
+				2E2B3772188BF41E001805D6 /* SOSViewController.h */,
+				2E2B3773188BF41E001805D6 /* SOSViewController.m */,
 			);
 			name = SOSView;
 			sourceTree = "<group>";
@@ -548,6 +553,7 @@
 				2ED0C645188B13B300B65265 /* NSString+FontAwesome.m in Sources */,
 				2E5E75B4188A760E004AD75C /* LoginViewController.m in Sources */,
 				2ED8AD3A188AA2F5004B8CD3 /* PFToasts.m in Sources */,
+				2E2B3774188BF41E001805D6 /* SOSViewController.m in Sources */,
 				2ECA97AF188A341E00994289 /* CGFlowController.m in Sources */,
 				2ED8AD34188AA2D7004B8CD3 /* PFDrinksLookup.m in Sources */,
 				2ECA97A7188A29F300994289 /* NewsViewController.m in Sources */,

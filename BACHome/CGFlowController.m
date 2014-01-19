@@ -328,15 +328,12 @@
     UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIView *containerView = [transitionContext containerView];
     
-    
     if (!(self.animationType == kCGFlowAnimationModalPresent || self.animationType == kCGFlowAnimationModalDismiss)) {
         [toVC.view removeFromSuperview];
         [self.flowController startTransition:toVC];
         toVC.view.bounds = containerView.bounds;
         [containerView addSubview:toVC.view];
     }
-    
-    
     
     [CGFlowAnimations flowAnimation:self.animationType fromSource:fromVC toDestination:toVC withContainer:containerView andDuration:[self transitionDuration:transitionContext] withOrientation:[fromVC interfaceOrientation] interactively:_interactive completion:^(BOOL finished) {
         if (finished) {

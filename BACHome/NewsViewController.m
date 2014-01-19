@@ -28,6 +28,11 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     _newsArray = [[NSMutableArray alloc] init];
+    self.collectionView.alwaysBounceVertical = YES;
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(startRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.collectionView addSubview:refreshControl];
+    
     NSDictionary *fontDic = [NSDictionary dictionaryWithObject:[UIFont fontWithName:kFontAwesomeFamilyName size:20.0] forKey:NSFontAttributeName];
     [_barsButton setTitleTextAttributes:fontDic forState:UIControlStateNormal];
     [_toastButton setTitleTextAttributes:fontDic forState:UIControlStateNormal];
@@ -57,6 +62,11 @@
     }
 }
 
+-(void)startRefresh:(id)sender {
+    [self generateNewsFeedData];
+    [sender endRefreshing];
+}
+
 #pragma mark - Button Delegate
 
 -(IBAction)barsPressed:(id)sender {
@@ -75,7 +85,8 @@
 }
 
 -(IBAction)sosPressed:(id)sender {
-    
+    UIViewController *destController = [self.storyboard instantiateViewControllerWithIdentifier:@"SOSView"];
+    [self.flowController flowToViewController:destController withAnimation:kCGFlowAnimationSlideUp completion:^(BOOL finished){}];
 }
 
 #pragma mark - Table view data source
@@ -111,7 +122,6 @@
     name.text = toast.username;
     drinkBar.text = [NSString stringWithFormat:@"Drinking %@ @ %@", toast.drink, toast.bar];
     toastQuote.text = toast.toast;
-    
     return cell;
 }
 

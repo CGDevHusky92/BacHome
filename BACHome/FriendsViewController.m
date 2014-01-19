@@ -6,13 +6,14 @@
 //  Copyright (c) 2014 Revision Works, LLC. All rights reserved.
 //
 
+#import <MessageUI/MessageUI.h>
 #import "FriendsViewController.h"
 #import "PFFriends.h"
 #import "PFToasts.h"
 #import "PFDrinksLookup.h"
 #import "NSString+FontAwesome.h"
 
-@interface FriendsViewController() <UISearchBarDelegate, UISearchDisplayDelegate>
+@interface FriendsViewController() <UISearchBarDelegate, UISearchDisplayDelegate, MFMessageComposeViewControllerDelegate>
 @property (nonatomic, strong) NSMutableArray *friendsArray;
 @property (nonatomic, strong) NSMutableArray *bacArray;
 @property (nonatomic, strong) NSMutableArray *searchArray;
@@ -29,6 +30,9 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     [self.searchDisplayController.searchResultsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"FriendsCell"];
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(startRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:refreshControl];
     
     _searching = false;
     _friendsArray = [[NSMutableArray alloc] init];
@@ -51,6 +55,11 @@
 
 -(void)dealloc {
     self.tableView.tableHeaderView = nil;
+}
+
+-(void)startRefresh:(id)sender {
+    [self loadCurrentFriends];
+    [sender endRefreshing];
 }
 
 #pragma mark - Table view data source
@@ -98,6 +107,11 @@
         [profileButton.titleLabel setFont:[UIFont fontWithName:kFontAwesomeFamilyName size:24.0]];
         [profileButton setTitle:[NSString fontAwesomeIconStringForEnum:FAUser] forState:UIControlStateNormal];
         [profileButton addTarget:self action:@selector(profilePressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        if (![[_friendsArray objectAtIndex:[indexPath row]] objectForKey:@"phone"] || [[[_friendsArray objectAtIndex:[indexPath row]] objectForKey:@"phone"] isEqualToString:@""]) {
+            [callButton setEnabled:NO];
+            [textButton setEnabled:NO];
+        }
         
         nameLabel.text = [[_friendsArray objectAtIndex:[indexPath row]] objectForKey:@"username"];
         if ([_bacArray objectAtIndex:[indexPath row]]) {
@@ -292,11 +306,12 @@
 #pragma mark - TableCellButtonDelegate
 
 -(IBAction)callPressed:(id)sender {
-    NSLog(@"Call Pressed");
+    NSString *cleanedString = [[[[_friendsArray objectAtIndex:_selectedIndex] objectForKey:@"phone"] componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789-+()"] invertedSet]] componentsJoinedByString:@""];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@", cleanedString]]];
 }
 
 -(IBAction)textPressed:(id)sender {
-    NSLog(@"Text Pressed");
+    [self sendTextMessageTo:[[_friendsArray objectAtIndex:_selectedIndex] objectForKey:@"username"] withNumber:[[_friendsArray objectAtIndex:_selectedIndex] objectForKey:@"phone"]];
 }
 
 -(IBAction)ddPressed:(id)sender {
@@ -305,11 +320,43 @@
     [pushQuery whereKey:@"username" equalTo:[[_friendsArray objectAtIndex:_selectedIndex] objectForKey:@"username"]];
     
     // Send push notification to query
-    [PFPush sendPushMessageToQueryInBackground:pushQuery withMessage:[NSString stringWithFormat:@"%@ wants to be your designated driver", [[PFUser currentUser] username]]];
+    [PFPush sendPushMessageToQueryInBackground:pushQuery withMessage:[NSString stringWithFormat:@"%@ wants to be your designated driver.", [[PFUser currentUser] username]]];
 }
 
 -(IBAction)profilePressed:(id)sender {
     NSLog(@"Profile Pressed");
+}
+
+#pragma mark - Message Delegate
+
+-(void)sendTextMessageTo:(NSString *)name withNumber:(NSString *)phoneNum {
+    NSArray *recipents = @[phoneNum];
+    NSString *message = [NSString stringWithFormat:@"Hey need a DD?"];
+    
+    MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
+    messageController.messageComposeDelegate = self;
+    [messageController setRecipients:recipents];
+    [messageController setBody:message];
+    
+    // Present message view controller on screen
+    [self presentViewController:messageController animated:YES completion:nil];
+}
+
+-(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
+    switch (result) {
+        case MessageComposeResultCancelled:
+        case MessageComposeResultSent:
+        default: {
+            [self dismissViewControllerAnimated:YES completion:nil];
+            break;
+        }
+        case MessageComposeResultFailed: {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to send SMS!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+            [self dismissViewControllerAnimated:YES completion:nil];
+            break;
+        }
+    }
 }
 
 #pragma mark - CGInteractiveTransitionDelegate methods
