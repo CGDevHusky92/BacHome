@@ -17,5 +17,7 @@
 -(id)initWithDefaults;
 -(void)setName:(NSString *)name;
 -(NSString *)name;
+-(void)setDescription:(NSString *)description;
+-(NSString *)description;
 
 @end

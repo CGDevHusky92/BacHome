@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2E2B3774188BF41E001805D6 /* SOSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2B3773188BF41E001805D6 /* SOSViewController.m */; };
+		2E2B3777188C12A0001805D6 /* dominos.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E2B3775188C12A0001805D6 /* dominos.png */; };
+		2E2B3778188C12A0001805D6 /* dominos@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E2B3776188C12A0001805D6 /* dominos@2x.png */; };
 		2E376DDE188B719F00FE9E13 /* TableIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E376DDB188B719F00FE9E13 /* TableIcon.png */; };
 		2E376DDF188B719F00FE9E13 /* TableIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E376DDC188B719F00FE9E13 /* TableIcon@2x.png */; };
 		2E376DE0188B719F00FE9E13 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E376DDD188B719F00FE9E13 /* icon@2x.png */; };
@@ -71,6 +73,8 @@
 /* Begin PBXFileReference section */
 		2E2B3772188BF41E001805D6 /* SOSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOSViewController.h; sourceTree = "<group>"; };
 		2E2B3773188BF41E001805D6 /* SOSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOSViewController.m; sourceTree = "<group>"; };
+		2E2B3775188C12A0001805D6 /* dominos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dominos.png; sourceTree = "<group>"; };
+		2E2B3776188C12A0001805D6 /* dominos@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dominos@2x.png"; sourceTree = "<group>"; };
 		2E376DDB188B719F00FE9E13 /* TableIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableIcon.png; sourceTree = "<group>"; };
 		2E376DDC188B719F00FE9E13 /* TableIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TableIcon@2x.png"; sourceTree = "<group>"; };
 		2E376DDD188B719F00FE9E13 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
@@ -437,6 +441,8 @@
 				2E376DDB188B719F00FE9E13 /* TableIcon.png */,
 				2E376DDC188B719F00FE9E13 /* TableIcon@2x.png */,
 				2E376DE1188B731900FE9E13 /* BacHomeLogo@2x.png */,
+				2E2B3775188C12A0001805D6 /* dominos.png */,
+				2E2B3776188C12A0001805D6 /* dominos@2x.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -525,8 +531,10 @@
 				2ECA9760188A225700994289 /* Images.xcassets in Resources */,
 				2E376DDE188B719F00FE9E13 /* TableIcon.png in Resources */,
 				2ED0C640188B112400B65265 /* FontAwesome.ttf in Resources */,
+				2E2B3777188C12A0001805D6 /* dominos.png in Resources */,
 				2ECA9752188A225700994289 /* InfoPlist.strings in Resources */,
 				2ECA975B188A225700994289 /* Main.storyboard in Resources */,
+				2E2B3778188C12A0001805D6 /* dominos@2x.png in Resources */,
 				2E376DE2188B731900FE9E13 /* BacHomeLogo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

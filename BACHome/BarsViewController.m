@@ -45,7 +45,7 @@
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"NewsCell";
+    static NSString *CellIdentifier = @"BarCells";
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.backgroundColor = [UIColor colorWithWhite:0.99 alpha:0.99];
     cell.layer.masksToBounds = NO;
@@ -58,12 +58,14 @@
     PFBarsLookup *bar = [_barsArray objectAtIndex:[indexPath row]];
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:100];
     UILabel *barName = (UILabel *)[cell viewWithTag:101];
+    UILabel *barDescription = (UILabel *)[cell viewWithTag:102];
+    
     barName.text = [bar name];
+    barDescription.text = [bar description];
     
     imageView.layer.cornerRadius = 20.0f;
     imageView.layer.masksToBounds = YES;
     imageView.image = [UIImage imageNamed:@"TableIcon"];
-    
     
     return cell;
 }
