@@ -39,4 +39,16 @@
 	return [self objectForKey:@"description"];
 }
 
+-(void)setRank:(NSString *)rank {
+    [self setObject:rank forKey:@"rank"];
+}
+
+-(NSString *)rank {
+    return [self objectForKey:@"rank"];
+}
+
+-(NSData *)image {
+    return nil;
+}
+
 @end

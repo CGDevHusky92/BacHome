@@ -31,4 +31,12 @@
 	return [self objectForKey:@"name"];
 }
 
+-(void)setStdDrink:(float)stdDrink {
+    [self setObject:[NSNumber numberWithFloat:stdDrink] forKey:@"stdDrink"];
+}
+
+-(float)stdDrink {
+    return [[self objectForKey:@"stdDrink"] floatValue];
+}
+
 @end

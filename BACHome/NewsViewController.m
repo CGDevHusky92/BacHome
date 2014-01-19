@@ -8,6 +8,8 @@
 
 #import "NewsViewController.h"
 #import "NSString+FontAwesome.h"
+#import "PFToasts.h"
+#import "PFFriends.h"
 
 @interface NewsViewController() <UINavigationControllerDelegate>
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *barsButton;
@@ -26,7 +28,6 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     _newsArray = [[NSMutableArray alloc] init];
-    
     NSDictionary *fontDic = [NSDictionary dictionaryWithObject:[UIFont fontWithName:kFontAwesomeFamilyName size:20.0] forKey:NSFontAttributeName];
     [_barsButton setTitleTextAttributes:fontDic forState:UIControlStateNormal];
     [_toastButton setTitleTextAttributes:fontDic forState:UIControlStateNormal];
@@ -37,11 +38,7 @@
     [_toastButton setTitle:[NSString fontAwesomeIconStringForEnum:FAGlass]];
     [_profileButton setTitle:[NSString fontAwesomeIconStringForEnum:FAUsers]];
     [_sosButton setTitle:[NSString fontAwesomeIconStringForEnum:FAExclamationTriangle]];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self generateNewsFeedData];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -84,38 +81,72 @@
 
 #pragma mark - Table view data source
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return [_newsArray count];
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"NewsCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    cell.backgroundColor = [UIColor colorWithWhite:0.99 alpha:0.99];
+    cell.layer.masksToBounds = NO;
+    cell.layer.shadowOffset = CGSizeMake(-5, 10);
+    cell.layer.shadowRadius = 5;
+    cell.layer.shadowOpacity = 0.5;
+    cell.layer.shadowPath = [UIBezierPath bezierPathWithRect:cell.bounds].CGPath;
     
     // Configure the cell...
+    PFToasts *toast = [_newsArray objectAtIndex:[indexPath row]];
+    UIImageView *imageView = (UIImageView *)[cell viewWithTag:100];
+    UILabel *name = (UILabel *)[cell viewWithTag:101];
+    UILabel *drinkBar = (UILabel *)[cell viewWithTag:102];
+    UILabel *toastQuote = (UILabel *)[cell viewWithTag:103];
+    
+    imageView.layer.cornerRadius = 20.0f;
+    imageView.layer.masksToBounds = YES;
+    imageView.image = [UIImage imageNamed:@"TableIcon"];
+    name.text = toast.username;
+    drinkBar.text = [NSString stringWithFormat:@"Drinking %@ @ %@", toast.drink, toast.bar];
+    toastQuote.text = toast.toast;
     
     return cell;
 }
 
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- }
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
+-(void)generateNewsFeedData {
+    if ([PFUser currentUser]) {
+        PFQuery *friendQuery = [PFQuery queryWithClassName:@"Friends"];
+        [friendQuery whereKey:@"me" equalTo:[[PFUser currentUser] username]];
+        friendQuery.cachePolicy = kPFCachePolicyCacheThenNetwork;
+        [friendQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
+            if (!error) {
+                NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+                [tempArray addObject:[[PFUser currentUser] username]];
+                for (PFFriends *friend in objects) {
+                    [tempArray addObject:[friend you]];
+                }
+                PFQuery *toastQuery = [PFQuery queryWithClassName:@"Toasts"];
+                [toastQuery whereKey:@"username" containedIn:tempArray];
+                toastQuery.cachePolicy = kPFCachePolicyCacheThenNetwork;
+                [toastQuery findObjectsInBackgroundWithBlock:^(NSArray *newObjects, NSError *error){
+                    if (!error) {
+                        [_newsArray removeAllObjects];
+                        _newsArray = [[newObjects sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:NO], nil]] mutableCopy];
+                        [self.collectionView reloadData];
+                    } else {
+                        NSLog(@"Error: %@", [error localizedDescription]);
+                    }
+                }];
+            } else {
+                NSLog(@"Error: %@", [error localizedDescription]);
+            }
+        }];
+    }
+}
 
 #pragma mark - CGInteractiveTransitionDelegate methods
 

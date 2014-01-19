@@ -49,6 +49,7 @@
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     PFUser *currentUser = [PFUser currentUser];
+    
     if (currentUser) {
         [currentInstallation setValue:currentUser.username forKey:@"username"];
     }

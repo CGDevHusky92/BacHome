@@ -8,25 +8,28 @@
 
 #import "FriendsViewController.h"
 #import "PFFriends.h"
+#import "NSString+FontAwesome.h"
 
 @interface FriendsViewController() <UISearchBarDelegate, UISearchDisplayDelegate>
-//@property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) NSMutableArray *friendsArray;
 @property (nonatomic, strong) NSMutableArray *searchArray;
+@property (assign) int selectedIndex;
 @property (atomic) BOOL searching;
+-(IBAction)callPressed:(id)sender;
+-(IBAction)textPressed:(id)sender;
+-(IBAction)ddPressed:(id)sender;
+-(IBAction)profilePressed:(id)sender;
 @end
 
 @implementation FriendsViewController
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-    //[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"FriendsCell"];
-    [self.searchDisplayController.searchResultsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"FriendsCell"];
-//    self.searchDisplayController.searchBar
+    
     _searching = false;
     _friendsArray = [[NSMutableArray alloc] init];
     _searchArray = [[NSMutableArray alloc] init];
-    
+    _selectedIndex = -1;
     [self loadCurrentFriends];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -36,11 +39,8 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    
-    
     if (self.transitioning) {
         [super viewWillAppear:animated];
-        NSLog(@"hmm");
     }
 }
 
@@ -65,21 +65,49 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"FriendsCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    NSString *name;
+    UIImageView *image = (UIImageView *)[cell viewWithTag:100];
+    UILabel *nameLabel = (UILabel *)[cell viewWithTag:101];
+    UILabel *detailLabel = (UILabel *)[cell viewWithTag:102];
+    
+    image.layer.cornerRadius = 20.0f;
+    image.layer.masksToBounds = YES;
+    image.image = [UIImage imageNamed:@"TableIcon"];
+    
     if (_searching) {
-        name = [[_searchArray objectAtIndex:[indexPath row]] objectForKey:@"username"];
+        nameLabel.text = [[_searchArray objectAtIndex:[indexPath row]] objectForKey:@"username"];
+        detailLabel.text = @"";
     } else {
-        name = [[_friendsArray objectAtIndex:[indexPath row]] objectForKey:@"you"];
+        UIButton *callButton = (UIButton *)[cell viewWithTag:103];
+        UIButton *textButton = (UIButton *)[cell viewWithTag:104];
+        UIButton *ddButton = (UIButton *)[cell viewWithTag:105];
+        UIButton *profileButton = (UIButton *)[cell viewWithTag:106];
+        [callButton.titleLabel setFont:[UIFont fontWithName:kFontAwesomeFamilyName size:24.0]];
+        [callButton setTitle:[NSString fontAwesomeIconStringForEnum:FAPhoneSquare] forState:UIControlStateNormal];
+        [callButton addTarget:self action:@selector(callPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [textButton.titleLabel setFont:[UIFont fontWithName:kFontAwesomeFamilyName size:24.0]];
+        [textButton setTitle:[NSString fontAwesomeIconStringForEnum:FAComment] forState:UIControlStateNormal];
+        [textButton addTarget:self action:@selector(textPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [ddButton.titleLabel setFont:[UIFont fontWithName:kFontAwesomeFamilyName size:24.0]];
+        [ddButton setTitle:[NSString fontAwesomeIconStringForEnum:FACloudUpload] forState:UIControlStateNormal];
+        [ddButton addTarget:self action:@selector(ddPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [profileButton.titleLabel setFont:[UIFont fontWithName:kFontAwesomeFamilyName size:24.0]];
+        [profileButton setTitle:[NSString fontAwesomeIconStringForEnum:FAUser] forState:UIControlStateNormal];
+        [profileButton addTarget:self action:@selector(profilePressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        nameLabel.text = [[_friendsArray objectAtIndex:[indexPath row]] objectForKey:@"username"];
+        detailLabel.text = [NSString stringWithFormat:@"%0.2f%%", [self determineBACOfFriend:[_friendsArray objectAtIndex:[indexPath row]]]];
     }
     
-    // Configure the cell...
-    cell.textLabel.text = name;
-    cell.imageView.layer.cornerRadius = 20.0f;
-    cell.imageView.layer.masksToBounds = YES;
-    
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (!_searching && _selectedIndex == [indexPath row]) {
+        return 88.0;
+    }
+    return 44.0;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -98,16 +126,21 @@
         [self.searchDisplayController setActive:NO animated:YES];
     } else {
         // open menu call text dd profile
-        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-        if (cell.frame.size.height < 60) {
-            [UIView animateWithDuration:0.1 animations:^{
-                cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height * 2);
-            }];
-        } else {
-            [UIView animateWithDuration:0.1 animations:^{
-                cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height / 2);
-            }];
+        if (indexPath.row == _selectedIndex) {
+            _selectedIndex = -1;
+            [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            return;
         }
+        
+        if (_selectedIndex >= 0) {
+            NSIndexPath *previousPath = [NSIndexPath indexPathForRow:_selectedIndex inSection:[indexPath section]];
+            _selectedIndex = (int)indexPath.row;
+            [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:previousPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
+        
+        //Finally set the selected index to the new selection and reload it to expand
+        _selectedIndex = (int)indexPath.row;
+        [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
 
@@ -128,25 +161,50 @@
 -(void)loadCurrentFriends {
     PFQuery *meQuery = [PFQuery queryWithClassName:@"Friends"];
     [meQuery whereKey:@"me" equalTo:[[PFUser currentUser] username]];
+    meQuery.cachePolicy = kPFCachePolicyCacheThenNetwork;
     [meQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
         if (!error) {
-            [_friendsArray removeAllObjects];
-            _friendsArray = [[objects sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"you" ascending:YES], nil]] mutableCopy];
-            [self.tableView reloadData];
+            NSMutableArray *tempFriends = [[NSMutableArray alloc] init];
+            for (PFFriends *friend in objects) {
+                [tempFriends addObject:[friend you]];
+            }
+            PFQuery *friendQuery = [PFUser query];
+            [friendQuery whereKey:@"username" containedIn:tempFriends];
+            friendQuery.cachePolicy = kPFCachePolicyCacheThenNetwork;
+            [friendQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
+                if (!error) {
+                    [_friendsArray removeAllObjects];
+                    _friendsArray = [[objects sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"username" ascending:YES], nil]] mutableCopy];
+                    [self.tableView reloadData];
+                } else {
+                    NSLog(@"Error: %@", [error localizedDescription]);
+                }
+            }];
         } else {
             NSLog(@"Error: %@", [error localizedDescription]);
         }
     }];
 }
 
+-(CGFloat)determineBACOfFriend:(PFObject *)friend {
+    
+    return 0.0;
+}
+
 #pragma mark - UISearchBar Delegate
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    PFQuery *userQuery = [PFUser query];
+    PFQuery *rulesQuery = [PFUser query];
+    [rulesQuery whereKey:@"username" notEqualTo:[[PFUser currentUser] username]];
+    for (PFFriends *friend in _friendsArray) {
+        [rulesQuery whereKey:@"username" notEqualTo:[friend you]];
+    }
     
-#warning exclude self and people that are already friends...
+    PFQuery *userQuery = [PFUser query];
     [userQuery whereKey:@"username" equalTo:[searchBar text]];
-    [userQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
+    
+    PFQuery *finalQuery = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects:rulesQuery, userQuery, nil]];
+    [finalQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
         if (!error) {
             if (self) {
                 [_searchArray removeAllObjects];
@@ -160,6 +218,9 @@
 }
 
 -(void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
+    if (_selectedIndex != -1) {
+        [self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:_selectedIndex inSection:0]];
+    }
     _searching = true;
 }
 
@@ -167,6 +228,24 @@
     [_searchArray removeAllObjects];
     _searching = false;
     [self.tableView reloadData];
+}
+
+#pragma mark - TableCellButtonDelegate
+
+-(IBAction)callPressed:(id)sender {
+    NSLog(@"Call Pressed");
+}
+
+-(IBAction)textPressed:(id)sender {
+    NSLog(@"Text Pressed");
+}
+
+-(IBAction)ddPressed:(id)sender {
+    NSLog(@"DD Pressed");
+}
+
+-(IBAction)profilePressed:(id)sender {
+    NSLog(@"Profile Pressed");
 }
 
 #pragma mark - CGInteractiveTransitionDelegate methods

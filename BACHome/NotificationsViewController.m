@@ -6,7 +6,9 @@
 //  Copyright (c) 2014 Revision Works, LLC. All rights reserved.
 //
 
+#import <Parse/Parse.h>
 #import "NotificationsViewController.h"
+#import "PFNotifications.h"
 
 @interface NotificationsViewController()
 @property (nonatomic, strong) NSMutableArray *notificationsArray;
@@ -17,6 +19,7 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     _notificationsArray = [[NSMutableArray alloc] init];
+    [self generateListOfNotifications];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -41,7 +44,19 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
+    NSString *type = @"";
+    PFNotifications *notification = [_notificationsArray objectAtIndex:[indexPath row]];
+    if ([[notification type] isEqualToString:@"sos"]) {
+        type = @"sos";
+    } else if ([[notification type] isEqualToString:@"warning"]) {
+        type = @"warning";
+    } else if ([[notification type] isEqualToString:@"friend"]) {
+        type = @"friend";
+    } else if ([[notification type] isEqualToString:@"badge"]) {
+        type = @"badge";
+    }
     
+    cell.textLabel.text = type;
     return cell;
 }
 
@@ -58,6 +73,21 @@
  }
  }
  */
+
+-(void)generateListOfNotifications {
+    PFQuery *notificationQuery = [PFQuery queryWithClassName:@"Notifications"];
+    [notificationQuery whereKey:@"receiver" equalTo:[[PFUser currentUser] username]];
+    notificationQuery.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    [notificationQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
+        if (!error) {
+            [_notificationsArray removeAllObjects];
+            _notificationsArray = [[objects sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:NO], nil]] mutableCopy];
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"Error: %@", [error localizedDescription]);
+        }
+    }];
+}
 
 #pragma mark - CGInteractiveTransitionDelegate methods
 

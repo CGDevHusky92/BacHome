@@ -10,6 +10,6 @@
 #import <Parse/Parse.h>
 #import "CGFlowController.h"
 
-@interface NewsViewController : UITableViewController
+@interface NewsViewController : UICollectionViewController
 
 @end

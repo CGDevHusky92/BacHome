@@ -19,5 +19,8 @@
 -(NSString *)name;
 -(void)setDescription:(NSString *)description;
 -(NSString *)description;
+-(void)setRank:(NSString *)rank;
+-(NSString *)rank;
+-(NSData *)image;
 
 @end
