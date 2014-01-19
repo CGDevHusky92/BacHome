@@ -8,10 +8,13 @@
 
 #import "FriendsViewController.h"
 #import "PFFriends.h"
+#import "PFToasts.h"
+#import "PFDrinksLookup.h"
 #import "NSString+FontAwesome.h"
 
 @interface FriendsViewController() <UISearchBarDelegate, UISearchDisplayDelegate>
 @property (nonatomic, strong) NSMutableArray *friendsArray;
+@property (nonatomic, strong) NSMutableArray *bacArray;
 @property (nonatomic, strong) NSMutableArray *searchArray;
 @property (assign) int selectedIndex;
 @property (atomic) BOOL searching;
@@ -25,9 +28,11 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
+    [self.searchDisplayController.searchResultsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"FriendsCell"];
     
     _searching = false;
     _friendsArray = [[NSMutableArray alloc] init];
+    _bacArray = [[NSMutableArray alloc] init];
     _searchArray = [[NSMutableArray alloc] init];
     _selectedIndex = -1;
     [self loadCurrentFriends];
@@ -67,22 +72,20 @@
     static NSString *CellIdentifier = @"FriendsCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    UIImageView *image = (UIImageView *)[cell viewWithTag:100];
-    UILabel *nameLabel = (UILabel *)[cell viewWithTag:101];
-    UILabel *detailLabel = (UILabel *)[cell viewWithTag:102];
-    
-    image.layer.cornerRadius = 20.0f;
-    image.layer.masksToBounds = YES;
-    image.image = [UIImage imageNamed:@"TableIcon"];
-    
     if (_searching) {
-        nameLabel.text = [[_searchArray objectAtIndex:[indexPath row]] objectForKey:@"username"];
-        detailLabel.text = @"";
+        cell.textLabel.text = [[_searchArray objectAtIndex:[indexPath row]] objectForKey:@"username"];
+        cell.detailTextLabel.text = @"";
+        cell.imageView.image = [UIImage imageNamed:@"TableIcon"];
     } else {
+        UIImageView *image = (UIImageView *)[cell viewWithTag:100];
+        UILabel *nameLabel = (UILabel *)[cell viewWithTag:101];
+        UILabel *detailLabel = (UILabel *)[cell viewWithTag:102];
         UIButton *callButton = (UIButton *)[cell viewWithTag:103];
         UIButton *textButton = (UIButton *)[cell viewWithTag:104];
         UIButton *ddButton = (UIButton *)[cell viewWithTag:105];
         UIButton *profileButton = (UIButton *)[cell viewWithTag:106];
+        
+        image.image = [UIImage imageNamed:@"TableIcon"];
         [callButton.titleLabel setFont:[UIFont fontWithName:kFontAwesomeFamilyName size:24.0]];
         [callButton setTitle:[NSString fontAwesomeIconStringForEnum:FAPhoneSquare] forState:UIControlStateNormal];
         [callButton addTarget:self action:@selector(callPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -97,9 +100,12 @@
         [profileButton addTarget:self action:@selector(profilePressed:) forControlEvents:UIControlEventTouchUpInside];
         
         nameLabel.text = [[_friendsArray objectAtIndex:[indexPath row]] objectForKey:@"username"];
-        detailLabel.text = [NSString stringWithFormat:@"%0.2f%%", [self determineBACOfFriend:[_friendsArray objectAtIndex:[indexPath row]]]];
+        if ([_bacArray objectAtIndex:[indexPath row]]) {
+            detailLabel.text = [NSString stringWithFormat:@"%0.2f%%", [[_bacArray objectAtIndex:[indexPath row]] floatValue]];
+        } else {
+            detailLabel.text = @"0.00%";
+        }
     }
-    
     return cell;
 }
 
@@ -131,13 +137,11 @@
             [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
             return;
         }
-        
         if (_selectedIndex >= 0) {
             NSIndexPath *previousPath = [NSIndexPath indexPathForRow:_selectedIndex inSection:[indexPath section]];
             _selectedIndex = (int)indexPath.row;
             [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:previousPath] withRowAnimation:UITableViewRowAnimationFade];
         }
-        
         //Finally set the selected index to the new selection and reload it to expand
         _selectedIndex = (int)indexPath.row;
         [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -173,8 +177,15 @@
             friendQuery.cachePolicy = kPFCachePolicyCacheThenNetwork;
             [friendQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
                 if (!error) {
+                    [_bacArray removeAllObjects];
                     [_friendsArray removeAllObjects];
                     _friendsArray = [[objects sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"username" ascending:YES], nil]] mutableCopy];
+                    for (PFUser *friend in _friendsArray) {
+                        [_bacArray addObject:[NSNumber numberWithFloat:0.0]];
+                    }
+                    for (PFUser *friend in _friendsArray) {
+                        [self determineBACOfFriend:friend];
+                    }
                     [self.tableView reloadData];
                 } else {
                     NSLog(@"Error: %@", [error localizedDescription]);
@@ -186,9 +197,56 @@
     }];
 }
 
--(CGFloat)determineBACOfFriend:(PFObject *)friend {
-    
-    return 0.0;
+-(void)determineBACOfFriend:(PFUser *)friend {
+    NSDate *now = [NSDate date];
+    NSDate *nowMinusTen = [now dateByAddingTimeInterval:-10*60*60];
+    PFQuery *userQuery = [PFQuery queryWithClassName:@"Toasts"];
+    [userQuery whereKey:@"username" equalTo:[friend username]];
+    [userQuery whereKey:@"createdAt" greaterThanOrEqualTo:nowMinusTen];
+    userQuery.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    [userQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
+        if (!error) {
+            NSMutableArray *sortTime = [[objects sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:NO], nil]] mutableCopy];
+            PFToasts *lastToast = [sortTime lastObject];
+            if (lastToast) {
+                NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+                NSDateComponents *components = [gregorian components:NSHourCalendarUnit fromDate:[lastToast createdAt] toDate:[NSDate date] options:0];
+                __block NSInteger timeHours = [components hour];
+                
+                NSMutableArray *drinkArray = [[NSMutableArray alloc] init];
+                for (PFToasts *toast in sortTime) {
+                    [drinkArray addObject:[toast drink]];
+                }
+                PFQuery *drinkQuery = [PFQuery queryWithClassName:@"DrinksLookup"];
+                [drinkQuery whereKey:@"name" containedIn:drinkArray];
+                drinkQuery.cachePolicy = kPFCachePolicyCacheThenNetwork;
+                [drinkQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
+                    if (!error) {
+                        float std = 0.0, hours = 0.0, top = 0.0, bw = 0.0;
+                        for (PFDrinksLookup *drinks in objects) {
+                            std += [drinks stdDrink];
+                        }
+                        hours = (.017 * timeHours); top = (.806 * 1.2 * std);
+                        bw = ([[friend objectForKey:@"weight"] floatValue] / 2.2046);
+                        if ([[[PFUser currentUser] objectForKey:@"gender"] isEqualToString:@"male"]) { bw *= .58; }
+                        else { bw *= .49; }
+                        top /= bw; top -= hours;
+                        for (int i = 0; i < [_friendsArray count]; i++) {
+                            if ([[[_friendsArray objectAtIndex:i] objectForKey:@"username"] isEqualToString:[friend username]]) {
+                                [_bacArray replaceObjectAtIndex:i withObject:[NSNumber numberWithFloat:fabs(top)]];
+                                break;
+                            }
+                        }
+                        [self.tableView reloadData];
+                    } else {
+                        NSLog(@"Error: %@", [error localizedDescription]);
+                    }
+                }];
+            }
+        } else {
+            NSLog(@"Error: %@", [error localizedDescription]);
+        }
+    }];
 }
 
 #pragma mark - UISearchBar Delegate
@@ -196,21 +254,15 @@
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     PFQuery *rulesQuery = [PFUser query];
     [rulesQuery whereKey:@"username" notEqualTo:[[PFUser currentUser] username]];
-    for (PFFriends *friend in _friendsArray) {
-        [rulesQuery whereKey:@"username" notEqualTo:[friend you]];
+    for (PFUser *friend in _friendsArray) {
+        [rulesQuery whereKey:@"username" notEqualTo:[friend username]];
     }
-    
-    PFQuery *userQuery = [PFUser query];
-    [userQuery whereKey:@"username" equalTo:[searchBar text]];
-    
-    PFQuery *finalQuery = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects:rulesQuery, userQuery, nil]];
-    [finalQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
+    [rulesQuery whereKey:@"username" equalTo:[searchBar text]];
+    [rulesQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
         if (!error) {
-            if (self) {
-                [_searchArray removeAllObjects];
-                _searchArray = [[objects sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"username" ascending:YES], nil]] mutableCopy];
-                [self.searchDisplayController.searchResultsTableView reloadData];
-            }
+            [_searchArray removeAllObjects];
+            _searchArray = [[objects sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"username" ascending:YES], nil]] mutableCopy];
+            [self.searchDisplayController.searchResultsTableView reloadData];
         } else {
             NSLog(@"Error: %@", [error localizedDescription]);
         }

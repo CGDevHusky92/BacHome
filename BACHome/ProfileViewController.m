@@ -172,10 +172,10 @@
         }
         
         if (![[[PFUser currentUser] objectForKey:@"gender"] isEqualToString:@""]) {
-            [_weightField setText:[[PFUser currentUser] objectForKey:@"gender"]];
-            [_weightLabel setText:[[PFUser currentUser] objectForKey:@"gender"]];
+            [_genderLabel setText:[[PFUser currentUser] objectForKey:@"gender"]];
+            [_genderSegment setSelectedSegmentIndex:0];
         } else {
-            [_emailLabel setText:@"No Gender"];
+            [_genderLabel setText:@"No Gender"];
         }
         
 #warning top drink as call
