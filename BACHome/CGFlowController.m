@@ -14,6 +14,7 @@
 
 @interface CGFlowController()
 @property (nonatomic, weak) UIViewController *statusController;
+@property (nonatomic, weak) UIViewController *modalController;
 @property (nonatomic, strong) CGFlowInteractor *interactor;
 @property (nonatomic, assign) Completion currentCompletion;
 @property (nonatomic, assign) kCGFlowAnimationType animationType;
@@ -141,6 +142,38 @@
     [self presentViewController:tempController animated:animated completion:^{}];
 }
 
+-(void)flowModalViewController:(UIViewController *)viewController completion:(Completion)completion {
+    self.flowedController.view.userInteractionEnabled = NO;
+    
+    viewController.transitioning = YES;
+    [viewController viewWillAppear:YES];
+    viewController.transitioning = NO;
+    
+    viewController.transitioningDelegate = self;
+    viewController.modalPresentationStyle = UIModalPresentationCustom;
+    _animationType = kCGFlowAnimationModalPresent;
+    self.interactive = NO;
+    
+    _currentCompletion = completion;
+    [self presentViewController:viewController animated:YES completion:^{}];
+}
+
+-(void)flowDismissModalViewControllerWithCompletion:(Completion)completion {
+    if (self.modalController) {
+        _modalController.transitioning = YES;
+        [_modalController viewWillDisappear:YES];
+        _modalController.transitioning = NO;
+        
+        _modalController.transitioningDelegate = self;
+        _modalController.modalPresentationStyle = UIModalPresentationCustom;
+        _animationType = kCGFlowAnimationModalDismiss;
+        self.interactive = NO;
+        
+        _currentCompletion = completion;
+        [self dismissViewControllerAnimated:YES completion:^{}];
+    }
+}
+
 -(void)setFlowedController:(UIViewController<CGFlowInteractiveDelegate> *)flowedController {
     _flowedController = flowedController;
     [self.flowedController setFlowController:self];
@@ -201,6 +234,24 @@
         [self prefersStatusBarHidden];
         [self setNeedsStatusBarAppearanceUpdate];
     }];
+}
+
+-(void)finishTransitionModal:(UIViewController *)vc appearing:(BOOL)appearing {
+    if (appearing) {
+        vc.transitioning = YES;
+        [vc viewDidAppear:YES];
+        vc.transitioning = NO;
+        
+        self.interactive = NO;
+        self.modalController = vc;
+        self.modalController.flowController = self;
+        [self.modalController didMoveToParentViewController:self];
+    } else {
+        [self.flowedController.view setUserInteractionEnabled:YES];
+        [self.modalController.view removeFromSuperview];
+        [self.modalController removeFromParentViewController];
+        self.modalController = nil;
+    }
 }
 
 -(void)proceedToNextViewControllerWithTransition:(kCGFlowInteractionType)type {
@@ -277,18 +328,31 @@
     UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIView *containerView = [transitionContext containerView];
     
-    [toVC.view removeFromSuperview];
-    [self.flowController startTransition:toVC];
-    toVC.view.bounds = containerView.bounds;
-    [containerView addSubview:toVC.view];
+    
+    if (!(self.animationType == kCGFlowAnimationModalPresent || self.animationType == kCGFlowAnimationModalDismiss)) {
+        [toVC.view removeFromSuperview];
+        [self.flowController startTransition:toVC];
+        toVC.view.bounds = containerView.bounds;
+        [containerView addSubview:toVC.view];
+    }
+    
+    
     
     [CGFlowAnimations flowAnimation:self.animationType fromSource:fromVC toDestination:toVC withContainer:containerView andDuration:[self transitionDuration:transitionContext] withOrientation:[fromVC interfaceOrientation] interactively:_interactive completion:^(BOOL finished) {
         if (finished) {
             [transitionContext completeTransition:YES];
             if ([transitionContext transitionWasCancelled]) {
-                [self.flowController cancelTransition:toVC];
+                if (!(self.animationType == kCGFlowAnimationModalPresent || self.animationType == kCGFlowAnimationModalDismiss)) {
+                    [self.flowController cancelTransition:toVC];
+                }
             } else {
-                [self.flowController finishTransition:toVC];
+                if (self.animationType == kCGFlowAnimationModalPresent) {
+                    [self.flowController finishTransitionModal:toVC appearing:YES];
+                } else if (self.animationType == kCGFlowAnimationModalDismiss) {
+                    [self.flowController finishTransitionModal:toVC appearing:NO];
+                } else {
+                    [self.flowController finishTransition:toVC];
+                }
             }
         }
     }];

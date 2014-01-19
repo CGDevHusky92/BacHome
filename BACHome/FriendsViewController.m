@@ -131,20 +131,27 @@
         }];
         [self.searchDisplayController setActive:NO animated:YES];
     } else {
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
         // open menu call text dd profile
         if (indexPath.row == _selectedIndex) {
             _selectedIndex = -1;
-            [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//            [tableView beginUpdates];
+//            [tableView endUpdates];
             return;
         }
         if (_selectedIndex >= 0) {
             NSIndexPath *previousPath = [NSIndexPath indexPathForRow:_selectedIndex inSection:[indexPath section]];
             _selectedIndex = (int)indexPath.row;
-            [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:previousPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:previousPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//            [tableView beginUpdates];
+//            [tableView endUpdates];
         }
         //Finally set the selected index to the new selection and reload it to expand
         _selectedIndex = (int)indexPath.row;
-        [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//        [tableView beginUpdates];
+//        [tableView endUpdates];
     }
 }
 
@@ -239,12 +246,12 @@
                         }
                         [self.tableView reloadData];
                     } else {
-                        NSLog(@"Error: %@", [error localizedDescription]);
+//                        NSLog(@"Error: %@", [error localizedDescription]);
                     }
                 }];
             }
         } else {
-            NSLog(@"Error: %@", [error localizedDescription]);
+//            NSLog(@"Error: %@", [error localizedDescription]);
         }
     }];
 }
@@ -293,7 +300,12 @@
 }
 
 -(IBAction)ddPressed:(id)sender {
-    NSLog(@"DD Pressed");
+    // Create our Installation query
+    PFQuery *pushQuery = [PFInstallation query];
+    [pushQuery whereKey:@"username" equalTo:[[_friendsArray objectAtIndex:_selectedIndex] objectForKey:@"username"]];
+    
+    // Send push notification to query
+    [PFPush sendPushMessageToQueryInBackground:pushQuery withMessage:[NSString stringWithFormat:@"%@ wants to be your designated driver", [[PFUser currentUser] username]]];
 }
 
 -(IBAction)profilePressed:(id)sender {

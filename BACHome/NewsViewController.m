@@ -44,7 +44,6 @@
 -(void)viewWillAppear:(BOOL)animated {
     if (self.transitioning) {
         [super viewWillAppear:animated];
-        
     }
 }
 
@@ -67,7 +66,7 @@
 
 -(IBAction)toastsPressed:(id)sender {
     UIViewController *destController = [self.storyboard instantiateViewControllerWithIdentifier:@"ToastsView"];
-    [self.flowController flowToViewController:destController withAnimation:kCGFlowAnimationSlideUp completion:^(BOOL finished){}];
+    [self.flowController flowModalViewController:destController completion:^(BOOL finished){}];
 }
 
 -(IBAction)profilePressed:(id)sender {
@@ -92,11 +91,10 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"NewsCell";
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
-    
     cell.backgroundColor = [UIColor colorWithWhite:0.99 alpha:0.99];
     cell.layer.masksToBounds = NO;
     cell.layer.shadowOffset = CGSizeMake(-5, 10);
-    cell.layer.shadowRadius = 5;
+    cell.layer.shadowRadius = 3;
     cell.layer.shadowOpacity = 0.5;
     cell.layer.shadowPath = [UIBezierPath bezierPathWithRect:cell.bounds].CGPath;
     

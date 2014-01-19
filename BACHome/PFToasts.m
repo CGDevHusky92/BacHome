@@ -19,6 +19,8 @@
     self = [super init];
     if (self) {
         // Set defaults here
+        [self setUsername:[[PFUser currentUser] username]];
+        [self setObject:[NSNumber numberWithLongLong:(long long)[[NSDate date] timeIntervalSince1970]] forKey:@"timeCreated"];
     }
     return self;
 }

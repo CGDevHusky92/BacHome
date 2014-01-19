@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "CGFlowController.h"
 
-@interface NotificationsViewController : UITableViewController
+@interface NotificationsViewController : UICollectionViewController
 
 @end

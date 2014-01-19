@@ -31,12 +31,23 @@
 @implementation CGFlowAnimations
 
 +(void)flowAnimation:(kCGFlowAnimationType)animationType fromSource:(UIViewController *)srcController toDestination:(UIViewController *)destController withContainer:(UIView *)containerView andDuration:(CGFloat)duration withOrientation:(UIInterfaceOrientation)orientation interactively:(BOOL)interactive completion:(Completion)complete {
+    
+    if (animationType == kCGFlowAnimationModalPresent) {
+        [self flowSlideUpFromSourceModally:srcController toDestination:destController withContainer:containerView andDuration:duration isAppearence:YES andScale:CGPointMake(0, 0) completion:complete];
+        return;
+    } else if (animationType == kCGFlowAnimationModalDismiss) {
+        [self flowSlideUpFromSourceModally:srcController toDestination:destController withContainer:containerView andDuration:duration isAppearence:NO andScale:CGPointMake(0, 0) completion:complete];
+        return;
+    }
+    
     kCGFlowAnimationType correctedType;
 //    if (interactive && ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)) {
 //        correctedType = animationType;
 //    } else {
         correctedType = [self correctForOrientation:orientation withAnimation:animationType];
 //    }
+    
+    
     
     if (correctedType == kCGFlowAnimationSlideUp) {
         [self flowSlideUpFromSource:srcController toDestination:destController withContainer:containerView andDuration:duration completion:complete];
@@ -54,6 +65,37 @@
         [self flowFlipLeftFromSource:srcController toDestination:destController withContainer:containerView andDuration:duration completion:complete];
     } else if (correctedType == kCGFlowAnimationFlipRight) {
         [self flowFlipRightFromSource:srcController toDestination:destController withContainer:containerView andDuration:duration completion:complete];
+    }
+}
+
++(void)flowSlideUpFromSourceModally:(UIViewController *)srcController toDestination:(UIViewController *)destController withContainer:(UIView *)containerView andDuration:(CGFloat)duration isAppearence:(BOOL)appearing andScale:(CGPoint)scale completion:(Completion)complete {
+    UIView *fromView = srcController.view;
+    UIView *toView = destController.view;
+    
+    // Presenting
+    if (appearing) {
+        
+        
+        // Round the corners
+        toView.layer.cornerRadius = 8;
+        toView.layer.masksToBounds = YES;
+        CGRect toFrame = CGRectMake(15, 184, 290, 200);
+        
+        CGRect bounds = containerView.bounds;
+        srcController.view.frame = bounds;
+        [destController.view setFrame:CGRectOffset(toFrame, 0, bounds.size.height)];
+        [containerView addSubview:toView];
+        
+        // Scale up to 90%
+        [UIView animateWithDuration:duration animations: ^{
+            toView.frame = toFrame;
+            fromView.alpha = 0.5;
+        } completion:complete];
+    } else {
+        [UIView animateWithDuration:duration animations: ^{
+            fromView.transform = CGAffineTransformMakeScale(0.0, 0.0);
+            toView.alpha = 1.0;
+        } completion:complete];
     }
 }
 
