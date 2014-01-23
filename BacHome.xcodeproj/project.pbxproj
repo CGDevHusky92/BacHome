@@ -26,6 +26,9 @@
 		2E5E75CA188A8453004AD75C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5E75C1188A8453004AD75C /* Security.framework */; };
 		2E5E75CB188A8453004AD75C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5E75C2188A8453004AD75C /* StoreKit.framework */; };
 		2E5E75CC188A8453004AD75C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5E75C3188A8453004AD75C /* SystemConfiguration.framework */; };
+		2E855D241891E359008244CE /* CGFlowAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E855D201891E359008244CE /* CGFlowAnimations.m */; };
+		2E855D251891E359008244CE /* CGFlowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E855D221891E359008244CE /* CGFlowController.m */; };
+		2E855D261891E359008244CE /* CGFlowInteractions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E855D231891E359008244CE /* CGFlowInteractions.m */; };
 		2ECA9748188A225600994289 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ECA9747188A225600994289 /* Foundation.framework */; };
 		2ECA974A188A225600994289 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ECA9749188A225600994289 /* CoreGraphics.framework */; };
 		2ECA974C188A225600994289 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ECA974B188A225600994289 /* UIKit.framework */; };
@@ -46,9 +49,6 @@
 		2ECA97A4188A291B00994289 /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECA97A3188A291B00994289 /* FriendsViewController.m */; };
 		2ECA97A7188A29F300994289 /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECA97A6188A29F300994289 /* NewsViewController.m */; };
 		2ECA97AA188A2A3200994289 /* NotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECA97A9188A2A3200994289 /* NotificationsViewController.m */; };
-		2ECA97AF188A341E00994289 /* CGFlowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECA97AB188A341E00994289 /* CGFlowController.m */; };
-		2ECA97B0188A341E00994289 /* CGFlowInteractions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECA97AC188A341E00994289 /* CGFlowInteractions.m */; };
-		2ECA97B1188A341E00994289 /* CGFlowAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECA97AE188A341E00994289 /* CGFlowAnimations.m */; };
 		2ED0C640188B112400B65265 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2ED0C63F188B112400B65265 /* FontAwesome.ttf */; };
 		2ED0C645188B13B300B65265 /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0C644188B13B300B65265 /* NSString+FontAwesome.m */; };
 		2ED8AD31188AA2CA004B8CD3 /* PFBarsLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED8AD30188AA2CA004B8CD3 /* PFBarsLookup.m */; };
@@ -93,6 +93,10 @@
 		2E5E75C1188A8453004AD75C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		2E5E75C2188A8453004AD75C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		2E5E75C3188A8453004AD75C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		2E855D201891E359008244CE /* CGFlowAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGFlowAnimations.m; sourceTree = "<group>"; };
+		2E855D211891E359008244CE /* CGFlowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGFlowController.h; sourceTree = "<group>"; };
+		2E855D221891E359008244CE /* CGFlowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGFlowController.m; sourceTree = "<group>"; };
+		2E855D231891E359008244CE /* CGFlowInteractions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGFlowInteractions.m; sourceTree = "<group>"; };
 		2ECA9744188A225600994289 /* BacHome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BacHome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ECA9747188A225600994289 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2ECA9749188A225600994289 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -123,10 +127,6 @@
 		2ECA97A6188A29F300994289 /* NewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
 		2ECA97A8188A2A3200994289 /* NotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationsViewController.h; sourceTree = "<group>"; };
 		2ECA97A9188A2A3200994289 /* NotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationsViewController.m; sourceTree = "<group>"; };
-		2ECA97AB188A341E00994289 /* CGFlowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGFlowController.m; sourceTree = "<group>"; };
-		2ECA97AC188A341E00994289 /* CGFlowInteractions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGFlowInteractions.m; sourceTree = "<group>"; };
-		2ECA97AD188A341E00994289 /* CGFlowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGFlowController.h; sourceTree = "<group>"; };
-		2ECA97AE188A341E00994289 /* CGFlowAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGFlowAnimations.m; sourceTree = "<group>"; };
 		2ED0C63F188B112400B65265 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		2ED0C641188B127D00B65265 /* BacHome-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "BacHome-Info.plist"; sourceTree = "<group>"; };
 		2ED0C643188B13B300B65265 /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontAwesome.h"; sourceTree = "<group>"; };
@@ -323,10 +323,10 @@
 		2ECA977C188A226300994289 /* CGFlow */ = {
 			isa = PBXGroup;
 			children = (
-				2ECA97AD188A341E00994289 /* CGFlowController.h */,
-				2ECA97AB188A341E00994289 /* CGFlowController.m */,
-				2ECA97AE188A341E00994289 /* CGFlowAnimations.m */,
-				2ECA97AC188A341E00994289 /* CGFlowInteractions.m */,
+				2E855D201891E359008244CE /* CGFlowAnimations.m */,
+				2E855D211891E359008244CE /* CGFlowController.h */,
+				2E855D221891E359008244CE /* CGFlowController.m */,
+				2E855D231891E359008244CE /* CGFlowInteractions.m */,
 			);
 			name = CGFlow;
 			sourceTree = "<group>";
@@ -554,24 +554,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E855D261891E359008244CE /* CGFlowInteractions.m in Sources */,
 				2ECA97A4188A291B00994289 /* FriendsViewController.m in Sources */,
 				2ECA979A188A242300994289 /* ToastsViewController.m in Sources */,
-				2ECA97B0188A341E00994289 /* CGFlowInteractions.m in Sources */,
 				2ECA9758188A225700994289 /* AppDelegate.m in Sources */,
 				2ED0C645188B13B300B65265 /* NSString+FontAwesome.m in Sources */,
 				2E5E75B4188A760E004AD75C /* LoginViewController.m in Sources */,
 				2ED8AD3A188AA2F5004B8CD3 /* PFToasts.m in Sources */,
 				2E2B3774188BF41E001805D6 /* SOSViewController.m in Sources */,
-				2ECA97AF188A341E00994289 /* CGFlowController.m in Sources */,
 				2ED8AD34188AA2D7004B8CD3 /* PFDrinksLookup.m in Sources */,
 				2ECA97A7188A29F300994289 /* NewsViewController.m in Sources */,
-				2ECA97B1188A341E00994289 /* CGFlowAnimations.m in Sources */,
 				2ECA97AA188A2A3200994289 /* NotificationsViewController.m in Sources */,
 				2ED8AD37188AA2E6004B8CD3 /* PFFriends.m in Sources */,
 				2E5E75B2188A760E004AD75C /* CreateAccountViewController.m in Sources */,
 				2ED8AD4F188AD293004B8CD3 /* PFBadges.m in Sources */,
 				2ED8AD31188AA2CA004B8CD3 /* PFBarsLookup.m in Sources */,
 				2ECA9797188A241B00994289 /* BarsViewController.m in Sources */,
+				2E855D251891E359008244CE /* CGFlowController.m in Sources */,
+				2E855D241891E359008244CE /* CGFlowAnimations.m in Sources */,
 				2ECA9754188A225700994289 /* main.m in Sources */,
 				2ED8AD3D188AB20D004B8CD3 /* PFNotifications.m in Sources */,
 				2ECA979D188A242B00994289 /* ProfileViewController.m in Sources */,

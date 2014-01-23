@@ -1,6 +1,5 @@
 //
 //  CGFlowInteractions.m
-//  CGFlowTest
 //
 //  Created by Charles Gorectke on 1/7/14.
 //  Copyright (c) 2014 Charles Gorectke. All rights reserved.
@@ -96,49 +95,49 @@
 }
 
 +(CGFloat)flowEdgeTopPercentageFromRecognizer:(UIScreenEdgePanGestureRecognizer *)sgr {
-    CGPoint translation = [sgr translationInView:sgr.view];
+    CGPoint translation = [sgr translationInView:sgr.view.superview];
     CGFloat percentage  = translation.y / CGRectGetHeight(sgr.view.bounds);
     return (percentage * DEFAULT_GESTURE_ENHANCER);
 }
 
 +(CGFloat)flowEdgeBottomPercentageFromRecognizer:(UIScreenEdgePanGestureRecognizer *)sgr {
-    CGPoint translation = [sgr translationInView:sgr.view];
+    CGPoint translation = [sgr translationInView:sgr.view.superview];
     CGFloat percentage  = -(translation.y / CGRectGetHeight(sgr.view.bounds));
     return (percentage * DEFAULT_GESTURE_ENHANCER);
 }
 
 +(CGFloat)flowEdgeLeftPercentageFromRecognizer:(UIScreenEdgePanGestureRecognizer *)sgr {
-    CGPoint translation = [sgr translationInView:sgr.view];
+    CGPoint translation = [sgr translationInView:sgr.view.superview];
     CGFloat percentage  = -(translation.x / CGRectGetWidth(sgr.view.bounds));
     return (percentage * DEFAULT_GESTURE_ENHANCER);
 }
 
 +(CGFloat)flowEdgeRightPercentageFromRecognizer:(UIScreenEdgePanGestureRecognizer *)sgr {
-    CGPoint translation = [sgr translationInView:sgr.view];
+    CGPoint translation = [sgr translationInView:sgr.view.superview];
     CGFloat percentage  = translation.x / CGRectGetWidth(sgr.view.bounds);
     return (percentage * DEFAULT_GESTURE_ENHANCER);
 }
 
 +(CGFloat)flowPanUpPercentageFromRecognizer:(UIPanGestureRecognizer *)pgr {
-    CGPoint translation = [pgr translationInView:pgr.view];
+    CGPoint translation = [pgr translationInView:pgr.view.superview];
     CGFloat percentage  = -(translation.y / CGRectGetHeight(pgr.view.bounds));
     return (percentage * DEFAULT_GESTURE_ENHANCER);
 }
 
 +(CGFloat)flowPanDownPercentageFromRecognizer:(UIPanGestureRecognizer *)pgr {
-    CGPoint translation = [pgr translationInView:pgr.view];
+    CGPoint translation = [pgr translationInView:pgr.view.superview];
     CGFloat percentage  = translation.y / CGRectGetHeight(pgr.view.bounds);
     return (percentage * DEFAULT_GESTURE_ENHANCER);
 }
 
 +(CGFloat)flowPanLeftPercentageFromRecognizer:(UIPanGestureRecognizer *)pgr {
-    CGPoint translation = [pgr translationInView:pgr.view];
+    CGPoint translation = [pgr translationInView:pgr.view.superview];
     CGFloat percentage  = -(translation.x / CGRectGetWidth(pgr.view.bounds));
     return (percentage * DEFAULT_GESTURE_ENHANCER);
 }
 
 +(CGFloat)flowPanRightPercentageFromRecognizer:(UIPanGestureRecognizer *)pgr {
-    CGPoint translation = [pgr translationInView:pgr.view];
+    CGPoint translation = [pgr translationInView:pgr.view.superview];
     CGFloat percentage  = translation.x / CGRectGetWidth(pgr.view.bounds);
     return (percentage * DEFAULT_GESTURE_ENHANCER);
 }
@@ -168,7 +167,7 @@
 }
 
 +(kCGFlowInteractionType)determineEdgeType:(UIScreenEdgePanGestureRecognizer *)edgeGesture {
-    CGPoint velocity = [edgeGesture velocityInView:edgeGesture.view];
+    CGPoint velocity = [edgeGesture velocityInView:edgeGesture.view.superview];
     CGFloat xVel = velocity.x;
     CGFloat yVel = velocity.y;
     if (fabs(xVel) > fabs(yVel)) {
@@ -192,7 +191,7 @@
 }
 
 +(kCGFlowInteractionType)determinePanType:(UIPanGestureRecognizer *)panGesture {
-    CGPoint velocity = [panGesture velocityInView:panGesture.view];
+    CGPoint velocity = [panGesture velocityInView:panGesture.view.superview];
     CGFloat xVel = velocity.x;
     CGFloat yVel = velocity.y;
     if ([panGesture numberOfTouches] == 1) {

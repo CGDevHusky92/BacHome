@@ -1,6 +1,5 @@
 //
 //  CGFlowAnimations.m
-//  CGFlowTest
 //
 //  Created by Charles Gorectke on 1/7/14.
 //  Copyright (c) 2014 Charles Gorectke. All rights reserved.
@@ -9,20 +8,18 @@
 #import "CGFlowController.h"
 
 @interface CGFlowAnimations()
+
++(void)flowModalSlideUp:(UIViewController *)srcController toDestination:(UIViewController *)destController withContainer:(UIView *)containerView andDuration:(CGFloat)duration isAppearence:(BOOL)appearing andScale:(CGPoint)scale completion:(Completion)complete;
+
 +(void)flowSlideUpFromSource:(UIViewController *)srcController toDestination:(UIViewController *)destController withContainer:(UIView *)containerView andDuration:(CGFloat)duration completion:(Completion)complete;
 +(void)flowSlideDownFromSource:(UIViewController *)srcController toDestination:(UIViewController *)destController withContainer:(UIView *)containerView andDuration:(CGFloat)duration completion:(Completion)complete;
 +(void)flowSlideLeftFromSource:(UIViewController *)srcController toDestination:(UIViewController *)destController withContainer:(UIView *)containerView andDuration:(CGFloat)duration completion:(Completion)complete;
 +(void)flowSlideRightFromSource:(UIViewController *)srcController toDestination:(UIViewController *)destController withContainer:(UIView *)containerView andDuration:(CGFloat)duration completion:(Completion)complete;
 
-
 +(void)flowFlipUpFromSource:(UIViewController *)srcController toDestination:(UIViewController *)destController withContainer:(UIView *)containerView andDuration:(CGFloat)duration completion:(Completion)complete;
-
 +(void)flowFlipDownFromSource:(UIViewController *)srcController toDestination:(UIViewController *)destController withContainer:(UIView *)containerView andDuration:(CGFloat)duration completion:(Completion)complete;
-
 +(void)flowFlipLeftFromSource:(UIViewController *)srcController toDestination:(UIViewController *)destController withContainer:(UIView *)containerView andDuration:(CGFloat)duration completion:(Completion)complete;
-
 +(void)flowFlipRightFromSource:(UIViewController *)srcController toDestination:(UIViewController *)destController withContainer:(UIView *)containerView andDuration:(CGFloat)duration completion:(Completion)complete;
-
 
 +(kCGFlowAnimationType)correctForOrientation:(UIInterfaceOrientation)orientation withAnimation:(kCGFlowAnimationType)animation;
 
@@ -31,23 +28,12 @@
 @implementation CGFlowAnimations
 
 +(void)flowAnimation:(kCGFlowAnimationType)animationType fromSource:(UIViewController *)srcController toDestination:(UIViewController *)destController withContainer:(UIView *)containerView andDuration:(CGFloat)duration withOrientation:(UIInterfaceOrientation)orientation interactively:(BOOL)interactive completion:(Completion)complete {
-    
-    if (animationType == kCGFlowAnimationModalPresent) {
-        [self flowSlideUpFromSourceModally:srcController toDestination:destController withContainer:containerView andDuration:duration isAppearence:YES andScale:CGPointMake(0, 0) completion:complete];
-        return;
-    } else if (animationType == kCGFlowAnimationModalDismiss) {
-        [self flowSlideUpFromSourceModally:srcController toDestination:destController withContainer:containerView andDuration:duration isAppearence:NO andScale:CGPointMake(0, 0) completion:complete];
-        return;
-    }
-    
     kCGFlowAnimationType correctedType;
-//    if (interactive && ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)) {
-//        correctedType = animationType;
-//    } else {
+    if (interactive && ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)) {
+        correctedType = animationType;
+    } else {
         correctedType = [self correctForOrientation:orientation withAnimation:animationType];
-//    }
-    
-    
+    }
     
     if (correctedType == kCGFlowAnimationSlideUp) {
         [self flowSlideUpFromSource:srcController toDestination:destController withContainer:containerView andDuration:duration completion:complete];
@@ -65,20 +51,23 @@
         [self flowFlipLeftFromSource:srcController toDestination:destController withContainer:containerView andDuration:duration completion:complete];
     } else if (correctedType == kCGFlowAnimationFlipRight) {
         [self flowFlipRightFromSource:srcController toDestination:destController withContainer:containerView andDuration:duration completion:complete];
+    } else if (correctedType == kCGFlowAnimationModalPresent) {
+        [self flowModalSlideUp:srcController toDestination:destController withContainer:containerView andDuration:duration isAppearence:YES andScale:CGPointMake(0, 0) completion:complete];
+    } else if (correctedType == kCGFlowAnimationModalDismiss) {
+        [self flowModalSlideUp:srcController toDestination:destController withContainer:containerView andDuration:duration isAppearence:NO andScale:CGPointMake(0, 0) completion:complete];
     }
 }
 
-+(void)flowSlideUpFromSourceModally:(UIViewController *)srcController toDestination:(UIViewController *)destController withContainer:(UIView *)containerView andDuration:(CGFloat)duration isAppearence:(BOOL)appearing andScale:(CGPoint)scale completion:(Completion)complete {
++(void)flowModalSlideUp:(UIViewController *)srcController toDestination:(UIViewController *)destController withContainer:(UIView *)containerView andDuration:(CGFloat)duration isAppearence:(BOOL)appearing andScale:(CGPoint)scale completion:(Completion)complete {
     UIView *fromView = srcController.view;
     UIView *toView = destController.view;
     
     // Presenting
     if (appearing) {
-        
-        
         // Round the corners
         toView.layer.cornerRadius = 8;
         toView.layer.masksToBounds = YES;
+        // Point to rect percentage determination using scale
         CGRect toFrame = CGRectMake(15, 184, 290, 200);
         
         CGRect bounds = containerView.bounds;
@@ -104,7 +93,7 @@
     srcController.view.frame = bounds;
     [destController.view setFrame:CGRectOffset(bounds, 0, bounds.size.height)];
     [UIView animateKeyframesWithDuration:duration delay:0.0f options:0 animations:^{
-        [destController setNeedsStatusBarAppearanceUpdate];
+        [srcController setNeedsStatusBarAppearanceUpdate];
         [srcController.view setFrame:CGRectOffset(bounds, 0, -bounds.size.height)];
         [destController.view setFrame:bounds];
     } completion:complete];
@@ -115,7 +104,7 @@
     srcController.view.frame = bounds;
     [destController.view setFrame:CGRectOffset(bounds, 0, -bounds.size.height)];
     [UIView animateKeyframesWithDuration:duration delay:0.0f options:0 animations:^{
-        [destController setNeedsStatusBarAppearanceUpdate];
+        [srcController setNeedsStatusBarAppearanceUpdate];
         [srcController.view setFrame:CGRectOffset(bounds, 0, bounds.size.height)];
         [destController.view setFrame:bounds];
     } completion:complete];
@@ -150,7 +139,6 @@
     CATransform3D transform = CATransform3DIdentity;
     transform.m34 = -1 / CGRectGetHeight(bounds);
     containerView.layer.sublayerTransform = transform;
-    
     destController.view.layer.transform = CATransform3DMakeRotation(-1.0 * M_PI_2, 1, 0, 0);
     [UIView animateKeyframesWithDuration:duration delay:0.0 options:0 animations:^{
         // First half is rotating in
@@ -170,7 +158,6 @@
     CATransform3D transform = CATransform3DIdentity;
     transform.m34 = -1 / CGRectGetHeight(bounds);
     containerView.layer.sublayerTransform = transform;
-    
     destController.view.layer.transform = CATransform3DMakeRotation(M_PI_2, 1, 0, 0);
     [UIView animateKeyframesWithDuration:duration delay:0.0 options:0 animations:^{
         // First half is rotating in
@@ -184,14 +171,48 @@
 }
 
 +(void)flowFlipLeftFromSource:(UIViewController *)srcController toDestination:(UIViewController *)destController withContainer:(UIView *)containerView andDuration:(CGFloat)duration completion:(Completion)complete {
-    
+    CGRect bounds = containerView.bounds;
+    srcController.view.frame = bounds;
+    // Start building the transform - 3D so need perspective
+    CATransform3D transform = CATransform3DIdentity;
+    transform.m34 = -1 / CGRectGetWidth(bounds);
+    containerView.layer.sublayerTransform = transform;
+    destController.view.layer.transform = CATransform3DMakeRotation(M_PI_2, 0, 1, 0);
+    [UIView animateKeyframesWithDuration:duration delay:0.0 options:0 animations:^{
+        // First half is rotating in
+        [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:0.5 animations:^{
+            srcController.view.layer.transform = CATransform3DMakeRotation(-1.0 * M_PI_2, 0, 1, 0);
+        }];
+        [UIView addKeyframeWithRelativeStartTime:0.5 relativeDuration:0.5 animations:^{
+            destController.view.layer.transform = CATransform3DMakeRotation(0, 0, 1, 0);
+        }];
+    } completion:complete];
 }
 
 +(void)flowFlipRightFromSource:(UIViewController *)srcController toDestination:(UIViewController *)destController withContainer:(UIView *)containerView andDuration:(CGFloat)duration completion:(Completion)complete {
-    
+    CGRect bounds = containerView.bounds;
+    srcController.view.frame = bounds;
+    // Start building the transform - 3D so need perspective
+    CATransform3D transform = CATransform3DIdentity;
+    transform.m34 = -1 / CGRectGetWidth(bounds);
+    containerView.layer.sublayerTransform = transform;
+    destController.view.layer.transform = CATransform3DMakeRotation(-1.0 * M_PI_2, 0, 1, 0);
+    [UIView animateKeyframesWithDuration:duration delay:0.0 options:0 animations:^{
+        // First half is rotating in
+        [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:0.5 animations:^{
+            srcController.view.layer.transform = CATransform3DMakeRotation(M_PI_2, 0, 1, 0);
+        }];
+        [UIView addKeyframeWithRelativeStartTime:0.5 relativeDuration:0.5 animations:^{
+            destController.view.layer.transform = CATransform3DMakeRotation(0, 0, 1, 0);
+        }];
+    } completion:complete];
 }
 
 +(kCGFlowAnimationType)correctForOrientation:(UIInterfaceOrientation)orientation withAnimation:(kCGFlowAnimationType)animation {
+    if (animation == kCGFlowAnimationModalPresent || animation == kCGFlowAnimationModalDismiss) {
+        return animation;
+    }
+    
     if (UIInterfaceOrientationPortrait == orientation) {
         return animation;
     } else if (UIInterfaceOrientationPortraitUpsideDown == orientation) {

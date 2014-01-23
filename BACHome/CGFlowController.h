@@ -1,6 +1,5 @@
 //
 //  CGFlowController.h
-//  CGFlowTest
 //
 //  Created by Charles Gorectke on 1/4/14.
 //  Copyright (c) 2014 Charles Gorectke. All rights reserved.

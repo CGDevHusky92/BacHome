@@ -74,7 +74,7 @@
         // Pull out
         _drinkFlag = true;
         [self.pickerWheel reloadComponent:0];
-        [UIView animateWithDuration:0.4 delay:0.0 options:0 animations:^{
+        [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             self.navigationController.view.frame = CGRectMake(self.navigationController.view.frame.origin.x, self.navigationController.view.frame.origin.y - (self.pickerWheel.frame.size.height / 2), self.navigationController.view.frame.size.width, self.navigationController.view.frame.size.height + self.pickerWheel.frame.size.height);
         } completion:^(BOOL finished) {
             _pickerShown = YES;
@@ -86,8 +86,8 @@
         } else {
             // Put away
             _drinkFlag = true;
-            [self.pickerWheel reloadComponent:0];
-            [UIView animateWithDuration:0.4 delay:0.0 options:0 animations:^{
+//            [self.pickerWheel reloadComponent:0];
+            [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 self.navigationController.view.frame = CGRectMake(self.navigationController.view.frame.origin.x, self.navigationController.view.frame.origin.y + (self.pickerWheel.frame.size.height / 2), self.navigationController.view.frame.size.width, self.navigationController.view.frame.size.height - self.pickerWheel.frame.size.height);
             } completion:^(BOOL finished) {
                 _pickerShown = NO;
@@ -101,7 +101,7 @@
         // Pull out
         _drinkFlag = NO;
         [self.pickerWheel reloadComponent:0];
-        [UIView animateWithDuration:0.4 delay:0.0 options:0 animations:^{
+        [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             self.navigationController.view.frame = CGRectMake(self.navigationController.view.frame.origin.x, self.navigationController.view.frame.origin.y - (self.pickerWheel.frame.size.height / 2), self.navigationController.view.frame.size.width, self.navigationController.view.frame.size.height + self.pickerWheel.frame.size.height);
         } completion:^(BOOL finished) {
             _pickerShown = YES;
@@ -113,11 +113,11 @@
         } else {
             // Put away
             _drinkFlag = NO;
-            [self.pickerWheel reloadComponent:0];
-            [UIView animateWithDuration:0.4 delay:0.0 options:0 animations:^{
+//            [self.pickerWheel reloadComponent:0];
+            [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 self.navigationController.view.frame = CGRectMake(self.navigationController.view.frame.origin.x, self.navigationController.view.frame.origin.y + (self.pickerWheel.frame.size.height / 2), self.navigationController.view.frame.size.width, self.navigationController.view.frame.size.height - self.pickerWheel.frame.size.height);
             } completion:^(BOOL finished) {
-                _pickerShown = YES;
+                _pickerShown = NO;
             }];
         }
     }
