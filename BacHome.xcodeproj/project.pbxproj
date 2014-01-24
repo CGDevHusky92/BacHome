@@ -323,9 +323,9 @@
 		2ECA977C188A226300994289 /* CGFlow */ = {
 			isa = PBXGroup;
 			children = (
-				2E855D201891E359008244CE /* CGFlowAnimations.m */,
 				2E855D211891E359008244CE /* CGFlowController.h */,
 				2E855D221891E359008244CE /* CGFlowController.m */,
+				2E855D201891E359008244CE /* CGFlowAnimations.m */,
 				2E855D231891E359008244CE /* CGFlowInteractions.m */,
 			);
 			name = CGFlow;

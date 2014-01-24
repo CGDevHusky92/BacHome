@@ -76,7 +76,7 @@
 
 -(IBAction)toastsPressed:(id)sender {
     UIViewController *destController = [self.storyboard instantiateViewControllerWithIdentifier:@"ToastsView"];
-    [self.flowController flowModalViewController:destController completion:^(BOOL finished){}];
+    [self.flowController flowModalViewController:destController withScale:CGPointMake(0.9, 0.35) completion:^(BOOL finished){}];
 }
 
 -(IBAction)profilePressed:(id)sender {
