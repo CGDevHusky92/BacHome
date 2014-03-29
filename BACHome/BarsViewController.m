@@ -78,7 +78,7 @@
 
 -(IBAction)donePressed:(id)sender {
     UIViewController *destController = [self.storyboard instantiateViewControllerWithIdentifier:@"CGFlowInitialScene"];
-    [self.flowController flowToViewController:destController withAnimation:kCGFlowAnimationSlideDown completion:^(BOOL finished){}];
+    [self.flowController flowToViewController:destController withAnimation:kCGFlowAnimationSlideDown andDuration:0.4 completion:^(BOOL finished){}];
 }
 
 -(void)generateBarData {

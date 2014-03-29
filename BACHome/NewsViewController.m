@@ -56,7 +56,7 @@
     if (self.transitioning) {
         if (![PFUser currentUser]) {
             UIViewController *loginController = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginView"];
-            [self.flowController flowToViewController:loginController withAnimation:kCGFlowAnimationSlideUp completion:^(BOOL finished){}];
+            [self.flowController flowToViewController:loginController withAnimation:kCGFlowAnimationSlideUp andDuration:0.4 completion:^(BOOL finished){}];
         }
         [super viewDidAppear:animated];
     }
@@ -71,22 +71,22 @@
 
 -(IBAction)barsPressed:(id)sender {
     UIViewController *destController = [self.storyboard instantiateViewControllerWithIdentifier:@"BarsView"];
-    [self.flowController flowToViewController:destController withAnimation:kCGFlowAnimationSlideUp completion:^(BOOL finished){}];
+    [self.flowController flowToViewController:destController withAnimation:kCGFlowAnimationSlideUp andDuration:0.4 completion:^(BOOL finished){}];
 }
 
 -(IBAction)toastsPressed:(id)sender {
     UIViewController *destController = [self.storyboard instantiateViewControllerWithIdentifier:@"ToastsView"];
-    [self.flowController flowModalViewController:destController withScale:CGPointMake(0.9, 0.35) completion:^(BOOL finished){}];
+    [self.flowController flowModalViewController:destController withAnimation:kCGFlowAnimationSlideUp andScale:CGPointMake(0.9, 0.35) completion:^(BOOL finished){}];
 }
 
 -(IBAction)profilePressed:(id)sender {
     UIViewController *destController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileView"];
-    [self.flowController flowToViewController:destController withAnimation:kCGFlowAnimationSlideUp completion:^(BOOL finished){}];
+    [self.flowController flowToViewController:destController withAnimation:kCGFlowAnimationSlideUp andDuration:0.4 completion:^(BOOL finished){}];
 }
 
 -(IBAction)sosPressed:(id)sender {
     UIViewController *destController = [self.storyboard instantiateViewControllerWithIdentifier:@"SOSView"];
-    [self.flowController flowToViewController:destController withAnimation:kCGFlowAnimationSlideUp completion:^(BOOL finished){}];
+    [self.flowController flowToViewController:destController withAnimation:kCGFlowAnimationSlideUp andDuration:0.4 completion:^(BOOL finished){}];
 }
 
 #pragma mark - Table view data source
@@ -158,7 +158,7 @@
 
 #pragma mark - CGInteractiveTransitionDelegate methods
 
--(void)proceedToNextViewControllerWithTransition:(kCGFlowInteractionType)type {
+-(void)proceedToNextViewControllerWithTransition:(CGFlowInteractionType)type {
     UIViewController *destController;
     if (type == kCGFlowInteractionSwipeLeft) {
         destController = [self.storyboard instantiateViewControllerWithIdentifier:@"NotificationsView"];

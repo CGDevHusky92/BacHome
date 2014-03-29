@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E19ED2618E777F100CB749E /* libCGFlowController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E19ED2518E777F100CB749E /* libCGFlowController.a */; };
+		2E19ED2918E7781200CB749E /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E19ED2718E7781200CB749E /* FacebookSDK.framework */; };
+		2E19ED2A18E7781200CB749E /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E19ED2818E7781200CB749E /* Parse.framework */; };
 		2E2B3774188BF41E001805D6 /* SOSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2B3773188BF41E001805D6 /* SOSViewController.m */; };
 		2E2B3777188C12A0001805D6 /* dominos.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E2B3775188C12A0001805D6 /* dominos.png */; };
 		2E2B3778188C12A0001805D6 /* dominos@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E2B3776188C12A0001805D6 /* dominos@2x.png */; };
@@ -16,7 +19,6 @@
 		2E376DE2188B731900FE9E13 /* BacHomeLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E376DE1188B731900FE9E13 /* BacHomeLogo@2x.png */; };
 		2E5E75B2188A760E004AD75C /* CreateAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5E75AD188A760E004AD75C /* CreateAccountViewController.m */; };
 		2E5E75B4188A760E004AD75C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5E75B0188A760E004AD75C /* LoginViewController.m */; };
-		2E5E75B6188A76BF004AD75C /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5E75B5188A76BF004AD75C /* Parse.framework */; };
 		2E5E75C4188A8453004AD75C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5E75BB188A8453004AD75C /* AudioToolbox.framework */; };
 		2E5E75C5188A8453004AD75C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5E75BC188A8453004AD75C /* CFNetwork.framework */; };
 		2E5E75C6188A8453004AD75C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5E75BD188A8453004AD75C /* CoreLocation.framework */; };
@@ -26,9 +28,6 @@
 		2E5E75CA188A8453004AD75C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5E75C1188A8453004AD75C /* Security.framework */; };
 		2E5E75CB188A8453004AD75C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5E75C2188A8453004AD75C /* StoreKit.framework */; };
 		2E5E75CC188A8453004AD75C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5E75C3188A8453004AD75C /* SystemConfiguration.framework */; };
-		2E855D241891E359008244CE /* CGFlowAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E855D201891E359008244CE /* CGFlowAnimations.m */; };
-		2E855D251891E359008244CE /* CGFlowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E855D221891E359008244CE /* CGFlowController.m */; };
-		2E855D261891E359008244CE /* CGFlowInteractions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E855D231891E359008244CE /* CGFlowInteractions.m */; };
 		2ECA9748188A225600994289 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ECA9747188A225600994289 /* Foundation.framework */; };
 		2ECA974A188A225600994289 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ECA9749188A225600994289 /* CoreGraphics.framework */; };
 		2ECA974C188A225600994289 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ECA974B188A225600994289 /* UIKit.framework */; };
@@ -71,6 +70,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2E19ED2518E777F100CB749E /* libCGFlowController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCGFlowController.a; path = "../CGFlowController/build/Debug-iphoneos/libCGFlowController.a"; sourceTree = "<group>"; };
+		2E19ED2718E7781200CB749E /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		2E19ED2818E7781200CB749E /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ../../../../Documents/FacebookSDK/Parse.framework; sourceTree = "<group>"; };
 		2E2B3772188BF41E001805D6 /* SOSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOSViewController.h; sourceTree = "<group>"; };
 		2E2B3773188BF41E001805D6 /* SOSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOSViewController.m; sourceTree = "<group>"; };
 		2E2B3775188C12A0001805D6 /* dominos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dominos.png; sourceTree = "<group>"; };
@@ -93,11 +95,7 @@
 		2E5E75C1188A8453004AD75C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		2E5E75C2188A8453004AD75C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		2E5E75C3188A8453004AD75C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		2E855D201891E359008244CE /* CGFlowAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGFlowAnimations.m; sourceTree = "<group>"; };
-		2E855D211891E359008244CE /* CGFlowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGFlowController.h; sourceTree = "<group>"; };
-		2E855D221891E359008244CE /* CGFlowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGFlowController.m; sourceTree = "<group>"; };
-		2E855D231891E359008244CE /* CGFlowInteractions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGFlowInteractions.m; sourceTree = "<group>"; };
-		2ECA9744188A225600994289 /* BacHome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BacHome.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2ECA9744188A225600994289 /* BACHome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BACHome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ECA9747188A225600994289 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2ECA9749188A225600994289 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2ECA974B188A225600994289 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -152,6 +150,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E19ED2618E777F100CB749E /* libCGFlowController.a in Frameworks */,
 				2E5E75C4188A8453004AD75C /* AudioToolbox.framework in Frameworks */,
 				2E5E75C5188A8453004AD75C /* CFNetwork.framework in Frameworks */,
 				2E5E75C6188A8453004AD75C /* CoreLocation.framework in Frameworks */,
@@ -163,8 +162,9 @@
 				2E5E75CC188A8453004AD75C /* SystemConfiguration.framework in Frameworks */,
 				2ECA974A188A225600994289 /* CoreGraphics.framework in Frameworks */,
 				2ECA974C188A225600994289 /* UIKit.framework in Frameworks */,
-				2E5E75B6188A76BF004AD75C /* Parse.framework in Frameworks */,
 				2ECA9748188A225600994289 /* Foundation.framework in Frameworks */,
+				2E19ED2918E7781200CB749E /* FacebookSDK.framework in Frameworks */,
+				2E19ED2A18E7781200CB749E /* Parse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,7 +242,7 @@
 		2ECA9745188A225600994289 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2ECA9744188A225600994289 /* BacHome.app */,
+				2ECA9744188A225600994289 /* BACHome.app */,
 				2ECA9765188A225700994289 /* BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_renameTests.xctest */,
 			);
 			name = Products;
@@ -251,6 +251,9 @@
 		2ECA9746188A225600994289 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2E19ED2718E7781200CB749E /* FacebookSDK.framework */,
+				2E19ED2818E7781200CB749E /* Parse.framework */,
+				2E19ED2518E777F100CB749E /* libCGFlowController.a */,
 				2E5E75BB188A8453004AD75C /* AudioToolbox.framework */,
 				2E5E75BC188A8453004AD75C /* CFNetwork.framework */,
 				2E5E75BD188A8453004AD75C /* CoreLocation.framework */,
@@ -279,7 +282,6 @@
 				2ECA9790188A234B00994289 /* BarControllers */,
 				2E5E75B9188A832F004AD75C /* SetUpViews */,
 				2E5E75BA188A83B1004AD75C /* ParseObjects */,
-				2ECA977C188A226300994289 /* CGFlow */,
 				2ECA974E188A225700994289 /* Supporting Files */,
 			);
 			name = BacHome;
@@ -318,17 +320,6 @@
 				2ECA976F188A225700994289 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		2ECA977C188A226300994289 /* CGFlow */ = {
-			isa = PBXGroup;
-			children = (
-				2E855D211891E359008244CE /* CGFlowController.h */,
-				2E855D221891E359008244CE /* CGFlowController.m */,
-				2E855D201891E359008244CE /* CGFlowAnimations.m */,
-				2E855D231891E359008244CE /* CGFlowInteractions.m */,
-			);
-			name = CGFlow;
 			sourceTree = "<group>";
 		};
 		2ECA9784188A228200994289 /* NewsView */ = {
@@ -464,7 +455,7 @@
 			);
 			name = BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_rename;
 			productName = BACHome;
-			productReference = 2ECA9744188A225600994289 /* BacHome.app */;
+			productReference = 2ECA9744188A225600994289 /* BACHome.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2ECA9764188A225700994289 /* BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_renameTests */ = {
@@ -491,7 +482,7 @@
 		2ECA973C188A225600994289 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Revision Works, LLC";
 				TargetAttributes = {
 					2ECA9743188A225600994289 = {
@@ -554,7 +545,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E855D261891E359008244CE /* CGFlowInteractions.m in Sources */,
 				2ECA97A4188A291B00994289 /* FriendsViewController.m in Sources */,
 				2ECA979A188A242300994289 /* ToastsViewController.m in Sources */,
 				2ECA9758188A225700994289 /* AppDelegate.m in Sources */,
@@ -570,8 +560,6 @@
 				2ED8AD4F188AD293004B8CD3 /* PFBadges.m in Sources */,
 				2ED8AD31188AA2CA004B8CD3 /* PFBarsLookup.m in Sources */,
 				2ECA9797188A241B00994289 /* BarsViewController.m in Sources */,
-				2E855D251891E359008244CE /* CGFlowController.m in Sources */,
-				2E855D241891E359008244CE /* CGFlowAnimations.m in Sources */,
 				2ECA9754188A225700994289 /* main.m in Sources */,
 				2ED8AD3D188AB20D004B8CD3 /* PFNotifications.m in Sources */,
 				2ECA979D188A242B00994289 /* ProfileViewController.m in Sources */,
@@ -630,7 +618,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -669,7 +656,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -708,12 +694,23 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/nbvikingsidiot001/Desktop/SourceApps/Github/BACHome,
+					/Users/nbvikingsidiot001/Documents/FacebookSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BACHome/BacHome-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"../**",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/BACHome/BacHome-Info.plist";
-				PRODUCT_NAME = BacHome;
-				PROVISIONING_PROFILE = "82898701-29FF-47AD-8FAB-B176C5BEB5DC";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/nbvikingsidiot001/Desktop/SourceApps/CGApplicationLibrary/CGFlowController/build/Debug-iphoneos",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = BACHome;
+				PROVISIONING_PROFILE = "0F277CD3-60F8-41B6-ADC7-E10BEBC4D9C0";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -727,12 +724,23 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/nbvikingsidiot001/Desktop/SourceApps/Github/BACHome,
+					/Users/nbvikingsidiot001/Documents/FacebookSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BACHome/BacHome-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"../**",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/BACHome/BacHome-Info.plist";
-				PRODUCT_NAME = BacHome;
-				PROVISIONING_PROFILE = "82898701-29FF-47AD-8FAB-B176C5BEB5DC";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/nbvikingsidiot001/Desktop/SourceApps/CGApplicationLibrary/CGFlowController/build/Debug-iphoneos",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = BACHome;
+				PROVISIONING_PROFILE = "0F277CD3-60F8-41B6-ADC7-E10BEBC4D9C0";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -740,7 +748,6 @@
 		2ECA977A188A225700994289 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BACHome.app/BACHome";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -763,7 +770,6 @@
 		2ECA977B188A225700994289 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BACHome.app/BACHome";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

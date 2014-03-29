@@ -83,7 +83,7 @@
         [alert show];
     } else if ([[notification type] isEqualToString:@"warning"]) {
         UIViewController *destController = [self.storyboard instantiateViewControllerWithIdentifier:@"SOSView"];
-        [self.flowController flowToViewController:destController withAnimation:kCGFlowAnimationSlideUp completion:^(BOOL finished){}];
+        [self.flowController flowToViewController:destController withAnimation:kCGFlowAnimationSlideUp andDuration:0.4 completion:^(BOOL finished){}];
     } else if ([[notification type] isEqualToString:@"friend"]) {
         PFFriends *friend = [[PFFriends alloc] initWithDefaults];
         [friend setYou:[[_notificationsArray objectAtIndex:[indexPath row]] objectForKey:@"sender"]];
@@ -112,7 +112,7 @@
 
 #pragma mark - CGInteractiveTransitionDelegate methods
 
--(void)proceedToNextViewControllerWithTransition:(kCGFlowInteractionType)type {
+-(void)proceedToNextViewControllerWithTransition:(CGFlowInteractionType)type {
     UIViewController *destController;
     if (type == kCGFlowInteractionSwipeRight) {
         destController = [self.storyboard instantiateViewControllerWithIdentifier:@"CGFlowInitialScene"];

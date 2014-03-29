@@ -361,7 +361,7 @@
 
 #pragma mark - CGInteractiveTransitionDelegate methods
 
--(void)proceedToNextViewControllerWithTransition:(kCGFlowInteractionType)type {
+-(void)proceedToNextViewControllerWithTransition:(CGFlowInteractionType)type {
     UIViewController *destController;
     if (type == kCGFlowInteractionSwipeLeft) {
         destController = [self.storyboard instantiateViewControllerWithIdentifier:@"CGFlowInitialScene"];

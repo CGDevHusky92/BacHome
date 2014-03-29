@@ -25,13 +25,13 @@
 
 -(IBAction)donePressed:(id)sender {
     UIViewController *destController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileView"];
-    [self.flowController flowToViewController:destController withAnimation:kCGFlowAnimationSlideDown completion:^(BOOL finished){}];
+    [self.flowController flowToViewController:destController withAnimation:kCGFlowAnimationSlideDown andDuration:0.4 completion:^(BOOL finished){}];
 }
 
 -(IBAction)logoutPressed:(id)sender {
     [PFUser logOut];
     UIViewController *loginController = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginView"];
-    [self.flowController flowToViewController:loginController withAnimation:kCGFlowAnimationSlideUp completion:^(BOOL finished){}];
+    [self.flowController flowToViewController:loginController withAnimation:kCGFlowAnimationSlideUp andDuration:0.4 completion:^(BOOL finished){}];
 }
 
 #pragma mark - Memory Methods

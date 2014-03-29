@@ -51,22 +51,24 @@
     [_postButton.titleLabel setFont:[UIFont fontWithName:kFontAwesomeFamilyName size:28.0]];
     [_postButton setTitle:[NSString fontAwesomeIconStringForEnum:FAPencilSquareO] forState:UIControlStateNormal];
     
-//    [_toastField set
-    
     _tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapView:)];
     [_tapGesture setNumberOfTapsRequired:1];
-    [_tapGesture setCancelsTouchesInView:NO];
+    [_tapGesture setCancelsTouchesInView:YES];
     [self.presentingViewController.view addGestureRecognizer:_tapGesture];
     
     [self generateDrinkList];
     [self generateBarList];
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    [self.flowController flowModalTapOutWithAnimation:kCGFlowModalDismissDisappearCenter withCompletion:^(BOOL finished){}];
+}
+
 #pragma mark - Button Delegate
 
 -(IBAction)cancelPressed:(id)sender {
     [self.presentingViewController.view removeGestureRecognizer:_tapGesture];
-    [self.flowController flowDismissModalViewControllerWithCompletion:^(BOOL finished){}];
+    [self.flowController flowDismissModalViewControllerWithAnimation:kCGFlowAnimationSlideDown andCompletion:^(BOOL finished){}];
 }
 
 -(IBAction)drinksPressed:(id)sender {
@@ -136,7 +138,7 @@
             }
         }];
         [self.presentingViewController.view removeGestureRecognizer:_tapGesture];
-        [self.flowController flowDismissModalViewControllerWithCompletion:^(BOOL finished){}];
+        [self.flowController flowDismissModalViewControllerWithAnimation:kCGFlowAnimationSlideDown andCompletion:^(BOOL finished){}];
     }
 }
 
@@ -211,13 +213,7 @@
 #pragma mark - Tap Methods
 
 -(void)tapView:(id)sender {
-    if ([_toastField isFirstResponder]) {
-        [_toastField resignFirstResponder];
-    } else {
-        [self.presentingViewController.view removeGestureRecognizer:_tapGesture];
-        [self.flowController flowDismissModalViewControllerWithCompletion:^(BOOL finished){}];
-    }
-    
+    [_toastField resignFirstResponder];
 }
 
 #pragma mark - Memory Methods

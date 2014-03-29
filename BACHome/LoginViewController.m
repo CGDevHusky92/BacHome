@@ -108,7 +108,7 @@
 
 -(void)dismissView:(id)sender {
     UIViewController *newsController = [self.storyboard instantiateViewControllerWithIdentifier:@"CGFlowInitialScene"];
-    [self.flowController flowToViewController:newsController withAnimation:kCGFlowAnimationSlideDown completion:^(BOOL finished){}];
+    [self.flowController flowToViewController:newsController withAnimation:kCGFlowAnimationSlideDown andDuration:0.4 completion:^(BOOL finished){}];
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
