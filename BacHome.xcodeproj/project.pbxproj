@@ -33,7 +33,7 @@
 		2ECA974C188A225600994289 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ECA974B188A225600994289 /* UIKit.framework */; };
 		2ECA9752188A225700994289 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2ECA9750188A225700994289 /* InfoPlist.strings */; };
 		2ECA9754188A225700994289 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECA9753188A225700994289 /* main.m */; };
-		2ECA9758188A225700994289 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECA9757188A225700994289 /* AppDelegate.m */; };
+		2ECA9758188A225700994289 /* LanguageLearnerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECA9757188A225700994289 /* LanguageLearnerAppDelegate.m */; };
 		2ECA975B188A225700994289 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ECA9759188A225700994289 /* Main.storyboard */; };
 		2ECA9760188A225700994289 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ECA975F188A225700994289 /* Images.xcassets */; };
 		2ECA9767188A225700994289 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ECA9766188A225700994289 /* XCTest.framework */; };
@@ -102,8 +102,8 @@
 		2ECA9751188A225700994289 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2ECA9753188A225700994289 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2ECA9755188A225700994289 /* BacHome-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BacHome-Prefix.pch"; sourceTree = "<group>"; };
-		2ECA9756188A225700994289 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		2ECA9757188A225700994289 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		2ECA9756188A225700994289 /* LanguageLearnerAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LanguageLearnerAppDelegate.h; sourceTree = "<group>"; };
+		2ECA9757188A225700994289 /* LanguageLearnerAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LanguageLearnerAppDelegate.m; sourceTree = "<group>"; };
 		2ECA975A188A225700994289 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2ECA975F188A225700994289 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2ECA9765188A225700994289 /* BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_renameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BacHome.temp_caseinsensitive_rename.temp_caseinsensitive_renameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -400,8 +400,8 @@
 		2ECA97A1188A24B400994289 /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
-				2ECA9756188A225700994289 /* AppDelegate.h */,
-				2ECA9757188A225700994289 /* AppDelegate.m */,
+				2ECA9756188A225700994289 /* LanguageLearnerAppDelegate.h */,
+				2ECA9757188A225700994289 /* LanguageLearnerAppDelegate.m */,
 			);
 			name = AppDelegate;
 			sourceTree = "<group>";
@@ -547,7 +547,7 @@
 			files = (
 				2ECA97A4188A291B00994289 /* FriendsViewController.m in Sources */,
 				2ECA979A188A242300994289 /* ToastsViewController.m in Sources */,
-				2ECA9758188A225700994289 /* AppDelegate.m in Sources */,
+				2ECA9758188A225700994289 /* LanguageLearnerAppDelegate.m in Sources */,
 				2ED0C645188B13B300B65265 /* NSString+FontAwesome.m in Sources */,
 				2E5E75B4188A760E004AD75C /* LoginViewController.m in Sources */,
 				2ED8AD3A188AA2F5004B8CD3 /* PFToasts.m in Sources */,

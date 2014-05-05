@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Revision Works, LLC. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "LanguageLearnerAppDelegate.h"
 #import "PFBadges.h"
 #import "PFBadgesLookup.h"
 #import "PFBarsLookup.h"
@@ -15,7 +15,7 @@
 #import "PFNotifications.h"
 #import "PFToasts.h"
 
-@implementation AppDelegate
+@implementation LanguageLearnerAppDelegate
 
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
